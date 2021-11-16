@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Home from './home'
 import Manage from './manage'
 import Graduate from './graduate';
+import Login from './login';
 
 class Content extends Component{
     constructor(props){
@@ -21,6 +22,8 @@ class Content extends Component{
             _content = <Manage></Manage>
         }else if(this.state.mode === 'graduate'){
             _content = <Graduate></Graduate>
+        }else if(this.state.mode === 'login'){
+            _content = <Login></Login>
         }
         return _content;
     }

@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
+import Table from './table';
 
 class Manage extends Component{
     render(){
         return(
-            <div>
-                이수과목관리
+            <div class='content'>
+                <Table></Table>
             </div>
         );
 
