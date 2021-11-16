@@ -1,25 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {BrowserRouter, Link} from 'react-router-dom';
+import Header from './components/header';
+import Content from './components/content';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-    <header>
-      <a href="index.html">IT정보공학과 학점관리 시스템</a>
-      <nav>
-        <ul>
-          <li><a href = "login.html">로그인/회원가입</a></li>
-        </ul>
-      </nav>
-    </header>
-    <div class="content">
-      <div class="btn"><Link to ="/manage">이수과목관리</Link></div>
-      <div class="btn"><a href="graduate.html">졸업시뮬레이션</a></div>
-    </div>
-  </BrowserRouter>
+    <Header></Header>
+    <Content></Content>
   </React.StrictMode>,
   document.getElementById('root')
 );

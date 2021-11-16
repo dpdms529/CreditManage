@@ -24,20 +24,19 @@ header{
   border:3px gray solid;
   margin: 20px;
   padding: 20px;
+  height: 700px;
 }
 
 .btn{
   background-color: skyblue;
   border:3px solid skyblue;
-  width: 300px;
   font-size: 40px;
   font-weight: bold;
-  margin: 20px; 
-  padding-top: 200px;
-  padding-bottom: 200px;
-  padding-left: 100px;
-  padding-right: 100px;
-  display: inline-block;
   text-align: center;
+  display:inline-block;
+  width: 45%;
+  height: 90%;
+  margin: 2.1%;
+  line-height: 600px;
 }
 
