@@ -1,0 +1,9 @@
+table{
+    border:3px skyblue solid;
+    width: 100%;
+    background-color: skyblue;
+}
+
+tr{
+    text-align: center;
+}

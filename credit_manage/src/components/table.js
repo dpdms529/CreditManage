@@ -1,7 +1,22 @@
 import React, {Component} from "react";
+import '../stylesheets/table.css'
 
 class Table extends Component{
     render(){
+        var data = this.props.data;
+        var list = [];
+        for(var i=0; i<data.length; i++){
+            list.push(                        
+            <tr key={data[i].id}>
+                <td>{data[i].div}</td>
+                <td>{data[i].abeek}</td>
+                <td>{data[i].subject}</td>
+                <td>{data[i].year}</td>
+                <td>{data[i].semester}</td>
+                <td>{data[i].credit}</td>
+                <td>{data[i].score}</td>
+            </tr>);
+        }
         return(
             <form>
                 <table>
@@ -17,15 +32,7 @@ class Table extends Component{
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>전공선택</td>
-                            <td>요소설계</td>
-                            <td>데이터베이스</td>
-                            <td>2021</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>A+</td>
-                        </tr>
+                        {list}
                     </tbody>
                 </table>
             </form>
