@@ -8,10 +8,7 @@ class Header extends Component{
                 <a class='title' href="/">IT정보공학과 학점관리 시스템</a>
                 <nav>
                     <ul>
-                        <li><a href = "login" onClick={function(e){
-                            e.preventDefault();
-                            alert("로그인");
-                        }}>로그인/회원가입</a></li>
+                        <li><a href = "login">로그인/회원가입</a></li>
                     </ul>
                 </nav>
             </header>

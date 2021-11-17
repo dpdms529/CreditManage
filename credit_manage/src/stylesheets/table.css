@@ -1,7 +1,10 @@
-table{
-    border:3px skyblue solid;
-    width: 100%;
+form{
     background-color: skyblue;
+    min-height: 500px;
+}
+
+table{
+    width: 100%;
 }
 
 tr{

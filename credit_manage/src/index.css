@@ -24,7 +24,7 @@ header{
   border:3px gray solid;
   margin: 20px;
   padding: 20px;
-  height: 700px;
+  min-height: 700px;
 }
 
 .btn{

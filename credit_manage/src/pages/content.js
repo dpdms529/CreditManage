@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import Table from './table';
+import Table from '../components/table';
+import Login from './login';
 
-class Manage extends Component{
+class Content extends Component{
     constructor(props){
         super(props);
         this.state={
@@ -10,14 +11,26 @@ class Manage extends Component{
         }
     } 
     render(){
+        var _content = null;
+        switch(this.props.id){
+            case 1:
+            case 2:
+                _content = <Table data={this.state.data}></Table>;
+                break;
+            case 3:
+                _content = <Login></Login>;
+                break;
+            default:
+        }
+
         return(
             <div class='content'>
                 <h2 class='title'>{this.props.title}</h2>
-                <Table data={this.state.data}></Table>
+                {_content}
             </div>
         );
 
     }
 }
 
-export default Manage;
+export default Content;
