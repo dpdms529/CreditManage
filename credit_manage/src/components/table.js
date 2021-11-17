@@ -15,6 +15,7 @@ class Table extends Component{
                 <td>{data[i].semester}</td>
                 <td>{data[i].credit}</td>
                 <td>{data[i].score}</td>
+                <td>X</td>
             </tr>);
         }
         return(

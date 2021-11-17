@@ -7,3 +7,13 @@ table{
 tr{
     text-align: center;
 }
+
+th{
+    padding-top:10px;
+    padding-bottom: 20px;
+
+}
+
+td{
+    padding:5px;
+}
