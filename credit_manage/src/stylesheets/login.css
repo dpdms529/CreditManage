@@ -3,6 +3,25 @@ form.login{
     min-height: 500px;
     width: 500px;
     border:3px gray solid;
-    margin: 20px;
+    margin: 0 auto;
     padding: 20px;
+    display: grid;
+    place-content: center;
+}
+
+div.login{
+    margin-bottom: 30px;
+    display:flex;
+}
+
+label.login{
+    font-weight: bold;
+    margin-right: 20px;
+    flex:1;
+}
+
+button.login{
+    width: 100px;
+    margin-left:80px;
+    margin-top: 20px;
 }

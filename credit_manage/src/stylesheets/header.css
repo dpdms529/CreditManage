@@ -10,6 +10,13 @@ nav{
 
 a.title {
     font-size: 25px;
+    font-weight: bold;
     display: inline-block;
     margin: 30px;
+}
+
+li.horizon{
+    float:left;
+    margin-left: 20px;
+    font-weight: bold;
 }

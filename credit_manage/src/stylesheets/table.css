@@ -1,6 +1,6 @@
 form{
     background-color: skyblue;
-    min-height: 500px;
+    min-height: 700px;
 }
 
 table{
@@ -14,9 +14,9 @@ tr{
 th{
     padding-top:10px;
     padding-bottom: 20px;
-
 }
 
 td{
-    padding:5px;
+    padding-bottom: 10px;
+    color:darkblue;
 }

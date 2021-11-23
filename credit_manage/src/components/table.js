@@ -15,7 +15,11 @@ class Table extends Component{
                 <td>{data[i].semester}</td>
                 <td>{data[i].credit}</td>
                 <td>{data[i].score}</td>
-                <td>X</td>
+                <td><button id={data[i].id} onClick={function(e){
+                    e.preventDefault();
+                    this.props.onDelete(e.target.id);
+                    console.log(e.target.id);
+                }.bind(this)}>삭제</button></td>
             </tr>);
         }
         return(
@@ -36,6 +40,16 @@ class Table extends Component{
                         {list}
                     </tbody>
                 </table>
+                <button className="center" onClick={function(e){
+                    e.preventDefault();
+                    var _id;
+                    if(data.length===0){
+                        _id = 1;
+                    }else{
+                        _id = data[data.length-1].id+1;
+                    }
+                    this.props.onAdd({id:_id, div:'전공선택',abeek:'요소설계',subject:'병렬분산시스템',year:'2021',semester:'2',credit:'3',score:'A+'});
+                }.bind(this)}>추가</button>
             </form>
         );
     }

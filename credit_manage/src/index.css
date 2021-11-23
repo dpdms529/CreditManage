@@ -40,7 +40,19 @@ header{
   line-height: 600px;
 }
 
-.title{
+h2.title{
   text-align: center;
 }
+
+button.center{
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 47%;
+}
+
+table.center{
+  margin-top:30%;
+  margin-left:10%;
+}
+
 
