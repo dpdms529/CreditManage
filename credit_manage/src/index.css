@@ -42,6 +42,7 @@ header{
 
 h2.title{
   text-align: center;
+  font-size: 30px;
 }
 
 button.center{
@@ -53,6 +54,14 @@ button.center{
 table.center{
   margin-top:30%;
   margin-left:10%;
+}
+
+button{
+  font-size: 15px;
+  font-weight: bold;
+  background-color: orange;
+  border:3px orange solid;
+  color:white;
 }
 
 
