@@ -1,0 +1,16 @@
+span.popup{
+    margin: 10px;
+}
+
+label.popup{
+    margin:10px;
+    font-weight: bold;
+}
+
+form.popup{
+    background-color: white;
+    min-height:fit-content;
+    border:3px grey solid;
+    padding: 10px;
+    
+}

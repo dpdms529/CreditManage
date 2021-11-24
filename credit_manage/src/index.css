@@ -30,13 +30,13 @@ header{
 .btn{
   background-color: skyblue;
   border:3px solid skyblue;
-  font-size: 40px;
+  font-size: 35px;
   font-weight: bold;
   text-align: center;
   display:inline-block;
   width: 45%;
   height: 90%;
-  margin: 2.1%;
+  margin: 2%;
   line-height: 600px;
 }
 

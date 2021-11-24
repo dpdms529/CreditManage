@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import '../stylesheets/table.css'
+import '../stylesheets/table.css';
 
 class Table extends Component{
     render(){
@@ -49,7 +49,11 @@ class Table extends Component{
                         _id = data[data.length-1].id+1;
                     }
                     this.props.onAdd({id:_id, div:'전공선택',abeek:'요소설계',subject:'병렬분산시스템',year:'2021',semester:'2',credit:'3',score:'A+'});
+                    var option = "width = 1000, height = 500, top = 100, left = 200, location = no";
+                    window.open('/popup','팝업',option);
+
                 }.bind(this)}>추가</button>
+                
             </form>
         );
     }
