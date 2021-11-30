@@ -7,7 +7,7 @@ class Header extends Component{
         var homeUrl = "/";
         var manageUrl = "manage?user_id="+user_id;
         var graduateUrl = "graduate?user_id="+user_id;
-        var list = <li className="horizon"><a href = "login">로그인</a></li>;
+        var list = <li className="horizon" key={0}><a href = "login">로그인</a></li>;
         if(user_id !== null){
             homeUrl = "/?user_id=" + user_id;
             list = [<li className="horizon" key={1}><a href = {manageUrl}>이수과목관리</a></li>,

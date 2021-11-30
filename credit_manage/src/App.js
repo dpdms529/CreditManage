@@ -4,7 +4,7 @@ import Pages from "./pages/pages";
 import {BrowserRouter} from 'react-router-dom';
 
 function App(){
-    var content = [<Header/>,<Pages/>]
+    var content = [<Header key="header"/>,<Pages key="content"/>]
     var path = window.location.pathname;
     if(path==='/popup'){
         content = <Pages/>

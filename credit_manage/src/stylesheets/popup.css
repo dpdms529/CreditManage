@@ -1,5 +1,17 @@
-span.popup{
-    margin: 10px;
+div.popupWrapper{
+    border:3px grey solid;
+    position:fixed;
+    background-color: pink;
+    top:20%;
+    left:5%;
+    width:90%;
+    height: 75%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+div.popup{
+    margin:10px;
 }
 
 label.popup{
@@ -12,5 +24,25 @@ form.popup{
     min-height:fit-content;
     border:3px grey solid;
     padding: 10px;
-    
+    margin: 10px;
 }
+
+form.content{
+    height: 400px;
+    overflow: scroll;
+}
+
+button.popup{
+    margin:10px;
+}
+
+button.close{
+    margin-top: 15px;
+    margin-left: 48%;
+}
+
+span.checkbox{
+    border:1px grey solid;
+    padding:5px;
+}
+

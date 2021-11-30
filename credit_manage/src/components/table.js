@@ -1,7 +1,27 @@
 import React, {Component} from "react";
 import '../stylesheets/table.css';
+import PopupDom from "../pages/popupDom";
+import Popup from '../components/popup';
 
 class Table extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            isOpenPopup: false
+        }
+    }
+
+    openPopup = () => {
+        this.setState({
+            isOpenPopup: true
+        })
+    }
+    closePopup = () => {
+        this.setState({
+            isOpenPopup: false
+        })
+    }
+
     render(){
         var data = this.props.data;
         var list = [];
@@ -22,8 +42,10 @@ class Table extends Component{
                 }.bind(this)}>삭제</button></td>
             </tr>);
         }
+
         return(
             <form>
+                <div id="popup"></div>
                 <table>
                     <thead>
                         <tr>
@@ -34,26 +56,22 @@ class Table extends Component{
                             <th>이수학기</th>
                             <th>학점</th>
                             <th>등급</th>
+                            <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                         {list}
                     </tbody>
                 </table>
                 <button className="center" onClick={function(e){
                     e.preventDefault();
-                    var _id;
-                    if(data.length===0){
-                        _id = 1;
-                    }else{
-                        _id = data[data.length-1].id+1;
-                    }
-                    this.props.onAdd({id:_id, div:'전공선택',abeek:'요소설계',subject:'병렬분산시스템',year:'2021',semester:'2',credit:'3',score:'A+'});
-                    var option = "width = 1000, height = 500, top = 100, left = 200, location = no";
-                    window.open('/popup','팝업',option);
-
+                    this.openPopup();
                 }.bind(this)}>추가</button>
-                
+                {this.state.isOpenPopup &&
+                    <PopupDom>
+                        <Popup data={data} onAdd={this.props.onAdd} onClose={this.closePopup}/>
+                    </PopupDom>
+                }
             </form>
         );
     }
