@@ -28,7 +28,7 @@ form.popup{
 }
 
 form.content{
-    height: 300px;
+    height: 250px;
     overflow: scroll;
 }
 
