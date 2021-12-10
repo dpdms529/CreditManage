@@ -45,12 +45,6 @@ h2.title{
   font-size: 30px;
 }
 
-button.center{
-  margin-top: 20px;
-  margin-bottom: 10px;
-  margin-left: 47%;
-}
-
 table.center{
   margin-top:30%;
   margin-left:10%;
@@ -63,5 +57,31 @@ button{
   border:3px orange solid;
   color:white;
 }
+
+table.criteria{
+  background-color: skyblue;
+  margin-bottom: 10px;
+  
+}
+
+thead.criteria{
+  border-right :3px black solid;
+}
+
+tr.criteria{
+  text-align: center;
+  
+}
+
+th.criteria{
+  width: 10%;
+  font-size: medium;
+}
+
+td.criteria{
+  width: auto;
+  font-size: medium;
+}
+
 
 

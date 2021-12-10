@@ -1,6 +1,6 @@
-form{
+form.table{
     background-color: skyblue;
-    min-height: 700px;
+    height: fit-content;
 }
 
 table{
@@ -21,3 +21,12 @@ th{
 td{
     padding-bottom: 10px;
 }
+
+div.table{
+    margin-left: 45%;
+    margin-top: 24%;
+}
+
+button.table{
+    margin:2%;
+  }

@@ -6,9 +6,18 @@ class Content extends Component{
     constructor(props){
         super(props);
         this.state={
-            data:[{id:1, div:'전공선택',abeek:'요소설계',subject:'데이터베이스',year:'2021',semester:'2',credit:'3',score:'A+'},
-            {id:2, div:'전공선택',abeek:'요소설계',subject:'병렬분산시스템',year:'2021',semester:'2',credit:'3',score:'A+'}]
+            login:{},
+            data:[]
         }
+    }
+    
+    onLogin = (loginData) => {
+        this.setState({login : loginData});
+    }
+
+    onAddAll = (dataList) => {
+        this.setState({data : dataList});
+        console.log(this.state.data);
     }
 
     onAdd = (newData) => {
@@ -36,10 +45,48 @@ class Content extends Component{
         var _content = null;
         switch(this.props.id){
             case 1:
+                _content =  <div>
+                                <table className="criteria">
+                                    <thead className="criteria">
+                                        <tr className="criteria">
+                                            <th colSpan="5" style={{borderRight:"1px white solid"}}>졸업구분</th>
+                                            <th colSpan="4">공학인증 구분</th>
+                                        </tr>
+                                        <tr className="criteria">
+                                            <th className="criteria">전공필수</th>
+                                            <th className="criteria">전공선택</th>
+                                            <th className="criteria">교양</th>
+                                            <th className="criteria">공필/일선</th>
+                                            <th className="criteria" style={{borderRight:"1px white solid"}}>취득학점</th>
+                                            <th className="criteria">BSM</th>
+                                            <th className="criteria">전문교양</th>
+                                            <th className="criteria">공학주제</th>
+                                            <th className="criteria">설계</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td className="criteria">0</td>
+                                            <td className="criteria">0</td>
+                                            <td className="criteria">0</td>
+                                            <td className="criteria">0</td>
+                                            <td className="criteria" style={{borderRight:"1px white solid"}}>0/140</td>
+                                            <td className="criteria">0</td>
+                                            <td className="criteria">0</td>
+                                            <td className="criteria">0</td>
+                                            <td className="criteria">0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <Table data={this.state.data} onAdd={this.onAdd} onDelete={this.onDelete}></Table>
+                            </div>;
+                break;
             case 2:
                 _content = <Table data={this.state.data} onAdd={this.onAdd} onDelete={this.onDelete}></Table>;
                 break;
             case 3:
+                _content = <Login id={this.props.id} onLogin={this.onLogin} onAddAll={this.onAddAll}></Login>;
+                break;
             case 4:
                 _content = <Login id={this.props.id}></Login>;
                 break;
