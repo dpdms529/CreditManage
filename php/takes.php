@@ -12,7 +12,8 @@ $conn = mysqli_connect($servername,$username,$password,$dbname);
 
 $query = "select t.course_id, c.title, s.division_cd, d.division_name, ac.abeek_cd, ac.abeek_name, a.abeek_credit, t.year, t.semester, c.credit, t.GP, t.complete
             from takes t, section s,course c, division d, abeek a, abeek_code ac 
-            where t.student_id = $id and s.course_id = c.course_id and t.year = s.year and t.semester = s.semester and t.course_id = s.course_id and s.division_cd = d.division_cd and t.course_id = a.course_id and a.abeek_cd = ac.abeek_cd";
+            where t.student_id = $id and s.course_id = c.course_id and t.year = s.year and t.semester = s.semester and t.course_id = s.course_id and s.division_cd = d.division_cd and t.course_id = a.course_id and a.abeek_cd = ac.abeek_cd
+            order by year, semester, course_id";
 
 header('Content-Type:application/json;charset=utf-8');
 header('Access-Control-Allow-Origin:*');
