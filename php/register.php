@@ -13,8 +13,7 @@ $dbname = "s201912352";
 
 $conn = mysqli_connect($servername,$username,$password,$dbname);
 
-$query = "insert into student
-values($id,$name,$grade,null,null,$pwd)";
+$query = "insert into student (student_id, name, grade, pwd) values($id,'$name',$grade,$pwd)";
 
 header('Content-Type:application/json;charset=utf-8');
 header('Access-Control-Allow-Origin:*');
@@ -23,11 +22,17 @@ header('Access-Control-Allow-Headers:content-type');
 if($result = mysqli_query($conn, $query)){             
     echo "{";
         echo "\"status\":\"OK\",";
-        echo "\"result\":\"success\"";
+        echo "\"result\":";
+            echo "{";
+                echo "\"student_id\":\"$id\"";
+            echo "}";
     echo "}";
 }else{
-    echo "failed to get data from database.";
-};
+    echo "{";
+        echo "\"status\":\"OK\",";
+        echo "\"result\":\"fail\"";
+    echo "}";
+}
 
 mysqli_close($conn);
 ?>

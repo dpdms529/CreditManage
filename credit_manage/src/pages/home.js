@@ -2,14 +2,14 @@ import React, {Component} from "react";
 
 class Home extends Component{
     render(){
-        var user_id = new URLSearchParams(window.location.search).get('user_id');
-        console.log(user_id);
-        var manageUrl = "manage?user_id="+user_id;
-        var graduateUrl = "graduate?user_id="+user_id;
+        var student_id = new URLSearchParams(window.location.search).get('student_id');
+        console.log(student_id);
+        var manageUrl = "manage?student_id="+student_id;
+        var graduateUrl = "graduate?student_id="+student_id;
         return(
             <div className="content">
                 <button className="btn" onClick={function(){
-                    if(user_id===null){
+                    if(student_id===null){
                         alert("로그인해주세요");
                     }else{
                         window.location.href=manageUrl;
@@ -17,7 +17,7 @@ class Home extends Component{
                     
                 }}>이수과목관리</button>
                 <button className="btn" onClick={function(){
-                    if(user_id===null){
+                    if(student_id===null){
                         alert("로그인해주세요");
                     }else{
                         window.location.href=graduateUrl;
