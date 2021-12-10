@@ -62,7 +62,7 @@ class Popup extends Component{
         var _id = len===0?1:propsData[len-1].id+1;
         var list = [];
         for(var i = 0;i<data.length;i++) {
-            if(i!=data.length-1 && data[i].course_id == data[i+1].course_id && data[i].year == data[i+1].year && data[i].semester == data[i+1].semester) {
+            if(i !== data.length-1 && data[i].course_id === data[i+1].course_id && data[i].year === data[i+1].year && data[i].semester === data[i+1].semester) {
                 list.push(
                     <tr key = {i}>
                         <td>{data[i].course_id}</td>
