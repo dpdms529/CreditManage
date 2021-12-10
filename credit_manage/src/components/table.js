@@ -72,6 +72,7 @@ class Table extends Component{
                         <Popup data={data} onAdd={this.props.onAdd} onClose={this.closePopup}/>
                     </PopupDom>
                 }
+                <button className="center">저장</button>
             </form>
         );
     }

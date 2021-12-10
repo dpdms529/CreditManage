@@ -1,7 +1,63 @@
+import axios from "axios";
 import React, {Component} from "react";
 import "../stylesheets/popup.css";
 
 class Popup extends Component{
+    constructor(props) {
+        super(props);
+        this.state={
+            content:"", // 검색어
+            division:"", //이숙구분
+            year:"",
+            abeek_bsm:false, // BSM
+            abeek_liberal:false, // 전문교양
+            abeek_tech:false, // 공학주제
+            abeek_design:false // 설계
+        }
+    }
+
+    handleChangeSelect = (e)=> {
+        this.setState({
+            [e.target.name] : e.target.value
+        })
+        console.log(e.target.value);
+    }
+
+    handleChangeCheck = (e) => {
+        this.setState({
+            [e.target.value]:e.target.checked
+        })
+
+        console.log(e.target.value, e.target.checked);
+
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            content : e.target.value
+        })
+        console.log(e.target.value);
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state.content, this.state.year, this.state.division, this.state.abeek_bsm, this.state.abeek_liberal, this.state.abeek_tech, this.state.abeek_design);
+
+        axios.post("http://210.117.182.234:8080/~s201912352/search.php",
+        {
+            content:this.state.content, // 검색어
+            division:this.state.division,
+            year:this.state.year,
+            abeek_bsm:this.state.abeek_bsm, // BSM
+            abeek_liberal:this.state.abeek_liberal, // 전문교양
+            abeek_tech:this.state.abeek_tech, // 공학주제
+            abeek_design:this.state.abeek_design // 설계
+        }).then(function(response){
+            console.log(response.data);
+        });
+
+    }
+
     render(){
         var data = this.props.data;
         var len = data.length;
@@ -41,7 +97,7 @@ class Popup extends Component{
                     <div className="popup">
                         <div>
                             <label className="popup">연도</label>
-                            <select size="1">
+                            <select size="1" onChange={this.handleChangeSelect} name="year">
                                 <option>전체</option>
                                 <option>2021</option>
                                 <option>2020</option>
@@ -50,7 +106,7 @@ class Popup extends Component{
                                 <option>2017</option>
                             </select>
                             <label className="popup">이수구분</label>
-                            <select size="1">
+                            <select size="1"onChange={this.handleChangeSelect} name="division">
                                 <option>전체</option>
                                 <option>전공필수</option>
                                 <option>전공선택</option>
@@ -59,21 +115,19 @@ class Popup extends Component{
                             </select>
                             <label className="popup">공학구분</label>
                             <span className="popup checkbox">
-                                <label><input type="checkbox" name="abeek" value="BSM"/>BSM</label>
-                                <label><input type="checkbox" name="abeek" value="전문교양"/>전문교양</label>
-                                <label><input type="checkbox" name="abeek" value="공학주제"/>공학주제</label>
-                                <label><input type="checkbox" name="abeek" value="설계"/>설계</label>
+                                <label><input type="checkbox" name="abeek" value="abeek_bsm" onChange={this.handleChangeCheck}/>BSM</label>
+                                <label><input type="checkbox" name="abeek" value="abeek_liberal" onChange={this.handleChangeCheck}/>전문교양</label>
+                                <label><input type="checkbox" name="abeek" value="abeek_tech" onChange={this.handleChangeCheck}/>공학주제</label>
+                                <label><input type="checkbox" name="abeek" value="abeek_design" onChange={this.handleChangeCheck}/>설계</label>
                             </span>
                             
                         </div>
                         <div>
                             <span className="popup">
                                 <label className="popup">과목명</label>
-                                <input placeholder="과목명을 입력하세요" style={{margin:"10px", padding:"5px", width:"550px"}}/>
+                                <input placeholder="과목명을 입력하세요" onChange={this.handleChange} style={{margin:"10px", padding:"5px", width:"550px"}}/>
                             </span>
-                            <button className="popup" onClick={function(){
-                                
-                            }}>검색</button>
+                            <button className="popup" onClick={this.handleSubmit}>검색</button>
                         </div>
                     </div>
                 </form>
@@ -86,8 +140,8 @@ class Popup extends Component{
                                 <th>과목명</th>
                                 <th>이수구분</th>
                                 <th>공학인증</th>
-                                <th>이수년도</th>
-                                <th>이수학기</th>
+                                <th>개설년도</th>
+                                <th>개설학기</th>
                                 <th>학점</th>
                                 <th></th>
                             </tr>
