@@ -7,8 +7,10 @@ class Table extends Component{
     constructor(props){
         super(props);
         this.state = {
-            isOpenPopup: false
-        }
+            isOpenPopup: false,
+            self_insert: [],
+            subject: []
+        };
     }
 
     openPopup = () => {
@@ -22,9 +24,14 @@ class Table extends Component{
         })
     }
 
+    onSave = (e) => {
+        e.preventDefault();
+        console.log(this.props.data);
+
+    }
+
     render(){
         var data = this.props.data;
-        console.log(data);
         var list = [];
         for(var i=0; i<data.length; i++){
             list.push(                        
@@ -74,7 +81,7 @@ class Table extends Component{
                                 <Popup data={data} onAdd={this.props.onAdd} onClose={this.closePopup}/>
                             </PopupDom>
                         }
-                        <button className="table">저장</button>
+                        <button className="table" onClick={this.onSave}>저장</button>
                     </div>
                 </form>
             

@@ -20,6 +20,7 @@ th{
 
 td{
     padding-bottom: 10px;
+    white-space: pre-line;
 }
 
 div.table{
