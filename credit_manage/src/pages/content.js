@@ -40,7 +40,8 @@ class Content extends Component{
                 _content = <Table data={this.state.data} onAdd={this.onAdd} onDelete={this.onDelete}></Table>;
                 break;
             case 3:
-                _content = <Login></Login>;
+            case 4:
+                _content = <Login id={this.props.id}></Login>;
                 break;
             default:
         }

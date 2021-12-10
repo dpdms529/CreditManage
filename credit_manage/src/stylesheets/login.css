@@ -16,12 +16,19 @@ div.login{
 
 label.login{
     font-weight: bold;
-    margin-right: 20px;
+    margin-right: 10px;
     flex:1;
 }
 
 button.login{
     width: 100px;
-    margin-left:80px;
+    margin-left:30%;
     margin-top: 20px;
+}
+
+a.login{
+    text-decoration: underline;
+    display: grid;
+    place-content: center;
+    margin-top: 10px;
 }
