@@ -74,7 +74,7 @@ class Popup extends Component{
                         <td>{data[i].credit}</td>
                         <td><button id={i} onClick={function(e){
                             e.preventDefault();
-                            this.props.onAdd({id:_id, div: data[e.target.id].division_name ,abeek: data[e.target.id].abeek_name,subject:data[e.target.id].title,year: data[e.target.id].year, semester:data[e.target.id].semester, credit: data[e.target.id].credit, score:'A+'});
+                            this.props.onAdd({id:_id, division_name: data[e.target.id].division_name ,abeek_name: `${data[e.target.id].abeek_name + data[e.target.id+1].abeek_name}` , title:data[e.target.id].title, year: data[e.target.id].year, semester:data[e.target.id].semester, credit: data[e.target.id].credit, GP:'A+'});
                         }.bind(this)}>추가</button></td>
                     </tr>
                 )
@@ -91,7 +91,7 @@ class Popup extends Component{
                         <td>{data[i].credit}</td>
                         <td><button id={i} onClick={function(e){
                             e.preventDefault();
-                            this.props.onAdd({id:_id, div: data[e.target.id].division_name ,abeek: data[e.target.id].abeek_name,subject:data[e.target.id].title,year: data[e.target.id].year, semester:data[e.target.id].semester, credit: data[e.target.id].credit, score:'A+'});
+                            this.props.onAdd({id:_id, division_name: data[e.target.id].division_name ,abeek_name: data[e.target.id].abeek_name,title:data[e.target.id].title,year: data[e.target.id].year, semester:data[e.target.id].semester, credit: data[e.target.id].credit, GP:'A+'});
                         }.bind(this)}>추가</button></td>
                     </tr>
                 )
