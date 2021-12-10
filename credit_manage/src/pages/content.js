@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from "axios";
 import Table from '../components/table';
 import Login from './login';
 
@@ -9,6 +10,17 @@ class Content extends Component{
             login:{},
             data:[]
         }
+        var student_id = new URLSearchParams(window.location.search).get('student_id');
+        axios.post("http://210.117.182.234:8080/~s201912352/takes.php",{id:student_id})
+        .then(function(response){
+            var list = response.data.result;
+            for(var i = 0;i<list.length;i++){
+                list[i]['id'] = i;
+                list[i]['key'] = i;
+            }
+            this.onAddAll(list);
+        }.bind(this));
+
     }
     
     onLogin = (loginData) => {
@@ -42,6 +54,7 @@ class Content extends Component{
     }
 
     render(){
+
         var _content = null;
         switch(this.props.id){
             case 1:

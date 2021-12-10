@@ -24,7 +24,6 @@ class Table extends Component{
 
     render(){
         var data = this.props.data;
-        console.log(data);
         var list = [];
         for(var i=0; i<data.length; i++){
             list.push(                        
