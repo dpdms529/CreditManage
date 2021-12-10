@@ -8,19 +8,13 @@ class Popup extends Component{
         this.state={
             content:"", // 검색어
             division:"", //이숙구분
-            year:"",
+            year:"전체",
             abeek_bsm:false, // BSM
             abeek_liberal:false, // 전문교양
             abeek_tech:false, // 공학주제
-            abeek_design:false // 설계
+            abeek_design:false, // 설계
+            data: []
         }
-    }
-
-    handleChangeSelect = (e)=> {
-        this.setState({
-            [e.target.name] : e.target.value
-        })
-        console.log(e.target.value);
     }
 
     handleChangeCheck = (e) => {
@@ -34,7 +28,7 @@ class Popup extends Component{
 
     handleChange = (e) => {
         this.setState({
-            content : e.target.value
+            [e.target.name] : e.target.value
         })
         console.log(e.target.value);
     }
@@ -52,44 +46,58 @@ class Popup extends Component{
             abeek_liberal:this.state.abeek_liberal, // 전문교양
             abeek_tech:this.state.abeek_tech, // 공학주제
             abeek_design:this.state.abeek_design // 설계
-        }).then(function(response){
+        }).then((response) => {
             console.log(response.data);
+            this.setState({
+                data: response.data.result
+            })
         });
 
     }
 
     render(){
-        var data = this.props.data;
-        var len = data.length;
-        var _id = len===0?1:data[len-1].id+1;
-        var list = [
-        <tr key={1}>
-            <td>00001234</td>
-            <td>수치해석</td>
-            <td>전공선택</td>
-            <td>공학주제</td>
-            <td>2021</td>
-            <td>2</td>
-            <td>3</td>
-            <td><button onClick={function(e){
-                        e.preventDefault();
-                        this.props.onAdd({id:_id, div:'전공선택',abeek:'요소설계',subject:'수치해석',year:'2021',semester:'2',credit:'3',score:'A+'});
-                    }.bind(this)}>추가</button></td>
-        </tr>,
-        <tr key={2}>
-            <td>00001234</td>
-            <td>프로그래밍언어론</td>
-            <td>전공선택</td>
-            <td>공학주제</td>
-            <td>2021</td>
-            <td>2</td>
-            <td>3</td>
-            <td><button onClick={function(e){
-                        e.preventDefault();
-                        this.props.onAdd({id:_id, div:'전공선택',abeek:'요소설계',subject:'수치해석',year:'2021',semester:'2',credit:'3',score:'A+'});
-                    }.bind(this)}>추가</button></td>
-        </tr>,
-        ];
+        var propsData = this.props.data;
+        var data = this.state.data;
+        var len = propsData.length;
+        var _id = len===0?1:propsData[len-1].id+1;
+        var list = [];
+        for(var i = 0;i<data.length;i++) {
+            if(i!=data.length-1 && data[i].course_id == data[i+1].course_id && data[i].year == data[i+1].year && data[i].semester == data[i+1].semester) {
+                list.push(
+                    <tr key = {i}>
+                        <td>{data[i].course_id}</td>
+                        <td>{data[i].title}</td>
+                        <td>{data[i].division_name}</td>
+                        <td>{data[i].abeek_name + "\n" + data[i+1].abeek_name}</td>
+                        <td>{data[i].year}</td>
+                        <td>{data[i].semester}</td>
+                        <td>{data[i].credit}</td>
+                        <td><button id={i} onClick={function(e){
+                            e.preventDefault();
+                            this.props.onAdd({id:_id, div: data[e.target.id].division_name ,abeek: data[e.target.id].abeek_name,subject:data[e.target.id].title,year: data[e.target.id].year, semester:data[e.target.id].semester, credit: data[e.target.id].credit, score:'A+'});
+                        }.bind(this)}>추가</button></td>
+                    </tr>
+                )
+                i++;
+            } else {
+                list.push(
+                    <tr key = {i}>
+                        <td>{data[i].course_id}</td>
+                        <td>{data[i].title}</td>
+                        <td>{data[i].division_name}</td>
+                        <td>{data[i].abeek_name}</td>
+                        <td>{data[i].year}</td>
+                        <td>{data[i].semester}</td>
+                        <td>{data[i].credit}</td>
+                        <td><button id={i} onClick={function(e){
+                            e.preventDefault();
+                            this.props.onAdd({id:_id, div: data[e.target.id].division_name ,abeek: data[e.target.id].abeek_name,subject:data[e.target.id].title,year: data[e.target.id].year, semester:data[e.target.id].semester, credit: data[e.target.id].credit, score:'A+'});
+                        }.bind(this)}>추가</button></td>
+                    </tr>
+                )
+            }
+
+        }
         return (
             <div className="popupWrapper">
                 <h2 className="title popup">과목 검색</h2>
@@ -97,7 +105,7 @@ class Popup extends Component{
                     <div className="popup">
                         <div>
                             <label className="popup">연도</label>
-                            <select size="1" onChange={this.handleChangeSelect} name="year">
+                            <select size="1" onChange={this.handleChange} name="year">
                                 <option>전체</option>
                                 <option>2021</option>
                                 <option>2020</option>
@@ -106,7 +114,7 @@ class Popup extends Component{
                                 <option>2017</option>
                             </select>
                             <label className="popup">이수구분</label>
-                            <select size="1"onChange={this.handleChangeSelect} name="division">
+                            <select size="1"onChange={this.handleChange} name="division">
                                 <option>전체</option>
                                 <option>전공필수</option>
                                 <option>전공선택</option>
@@ -125,7 +133,7 @@ class Popup extends Component{
                         <div>
                             <span className="popup">
                                 <label className="popup">과목명</label>
-                                <input placeholder="과목명을 입력하세요" onChange={this.handleChange} style={{margin:"10px", padding:"5px", width:"550px"}}/>
+                                <input placeholder="과목명을 입력하세요" onChange={this.handleChange} name="content" style={{margin:"10px", padding:"5px", width:"550px"}}/>
                             </span>
                             <button className="popup" onClick={this.handleSubmit}>검색</button>
                         </div>

@@ -30,7 +30,7 @@ if($content != "") {
 if($division == '전공필수') {
     $query = $query." and s.division_cd = '02'";
 } else if($division == '전공선택') {
-    $query = $query." and s.divison_cd = '03'";
+    $query = $query." and s.division_cd = '03'";
 } else if($division == '일반선택') {
     $query = $query." and s.division_cd = '05'";
 } else if($division == '교양') {
@@ -58,8 +58,10 @@ $abeek = substr($abeek, 1, strlen($abeek));
 
 if(!$abeek_bsm && !$abeek_tech && !$abeek_liberal && !$abeek_design) {
 } else {
-    $query = $query." and a.abeek_cd regexp "."'$abeek';";
+    $query = $query." and a.abeek_cd regexp "."'$abeek'";
 }
+
+$query = $query." oreder by s.year, s.semester, c.course_id;";
 
 if($result = mysqli_query($conn, $query)) {
     $row_num = mysqli_num_rows($result);
@@ -82,6 +84,5 @@ if($result = mysqli_query($conn, $query)) {
 } else {
     echo "failed to get data from database.";
 }
-echo $query;
 mysqli_close($conn);
 ?>
