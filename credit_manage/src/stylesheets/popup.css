@@ -28,7 +28,7 @@ form.popup{
 }
 
 form.content{
-    height: 400px;
+    height: 45%;
     overflow: scroll;
 }
 
@@ -37,7 +37,7 @@ button.popup{
 }
 
 button.close{
-    margin-top: 15px;
+    margin-top: 1%;
     margin-left: 48%;
 }
 

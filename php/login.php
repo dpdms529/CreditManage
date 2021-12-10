@@ -11,12 +11,13 @@ $dbname = "s201912352";
 
 $conn = mysqli_connect($servername,$username,$password,$dbname);
 
-$query = "select 
+$query = "select
             case
-                when student_id = $id and pwd = $pwd then 1
+                when student_id = student_id and pwd = pwd then 1
                 else 0
             end isMember
-        from student";
+            from student
+            where student_id = $id and pwd = $pwd";
 
 header('Content-Type:application/json;charset=utf-8');
 header('Access-Control-Allow-Origin:*');
