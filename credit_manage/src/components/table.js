@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import '../stylesheets/table.css';
 import PopupDom from "../pages/popupDom";
 import Popup from '../components/popup';
+import axios from "axios";
 
 class Table extends Component{
     constructor(props){
@@ -26,7 +27,20 @@ class Table extends Component{
 
     onSave = (e) => {
         e.preventDefault();
-        console.log(this.props.data);
+        this.setState({
+            subject: this.props.data
+        })
+        console.log(this.state.subject);
+        axios.post("http://210.117.182.234:8080/~s201912352/manage_save.php",
+        {
+            subejct: this.state.subject,
+            self: this.state.self_insert
+        }).then((response) => {
+            console.log(response.data);
+            this.setState({
+                data: response.data.result
+            })
+        });
 
     }
 
