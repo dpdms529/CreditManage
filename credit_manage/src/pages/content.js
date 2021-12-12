@@ -10,16 +10,20 @@ class Content extends Component{
             login:{},
             data:[]
         }
-        var student_id = new URLSearchParams(window.location.search).get('student_id');
-        axios.post("http://210.117.182.234:8080/~s201912352/takes.php",{id:student_id})
-        .then(function(response){
-            var list = response.data.result;
-            for(var i = 0;i<list.length;i++){
-                list[i]['id'] = i;
-                list[i]['key'] = i;
-            }
-            this.onAddAll(list);
-        }.bind(this));
+        if(props.id < 3){
+            var student_id = new URLSearchParams(window.location.search).get('student_id');
+            axios.post("http://210.117.182.234:8080/~s201912352/takes.php",{id:student_id})
+            .then(function(response){
+                console.log(response.data.result);
+                var list = response.data.result;
+                for(var i = 0;i<list.length;i++){
+                    list[i].id= i;
+                    list[i].key = i;
+                }
+                this.onAddAll(list);
+                
+            }.bind(this));
+        }
 
     }
     
