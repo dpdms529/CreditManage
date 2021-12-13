@@ -10,7 +10,7 @@ $dbname = "s201912352";
 
 $conn = mysqli_connect($servername,$username,$password,$dbname);
 
-$query = " select admission_year, c.criteria_cd, criteria_credit, graduation_name 
+$query = "select admission_year, c.criteria_cd, criteria_credit, criteria_name 
             from graduation_criteria c, grad_criteria_list l 
             where c.admission_year = $year and c.criteria_cd = l.criteria_cd";
 
@@ -24,15 +24,15 @@ if($result = mysqli_query($conn, $query)){
         echo "\"status\":\"OK\",";
         echo "\"result\":";
             echo "[";
-            for($i = 0; $i < $row_num; $i++){
+                for($i = 0; $i < $row_num; $i++){
                     $row = mysqli_fetch_array($result);
                     echo "{";
-                    echo "\"admission_year\":\"$row[admission_year]\", \"criteria_cd\":\"$row[criteria_cd]\", \"citeria_credit\":\"$row[criteria_credit]\", \"graduation_name\":\"$row[graduation_name]\"";
+                        echo "\"admission_year\":\"$row[admission_year]\", \"criteria_cd\":\"$row[criteria_cd]\", \"citeria_credit\":\"$row[criteria_credit]\", \"criteria_name\":\"$row[criteria_name]\"";
                     echo "}";
                     if($i<$row_num-1){
                             echo ",";
                     }
-            }
+                }
             echo "]";
     echo "}";
 }else{

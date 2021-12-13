@@ -24,12 +24,6 @@ class Table extends Component{
         })
     }
 
-    onSave = (e) => {
-        e.preventDefault();
-        console.log(this.props.data);
-
-    }
-
     render(){
         var data = this.props.data;
         var list = [];
@@ -83,7 +77,10 @@ class Table extends Component{
                                 <Popup data={data} onAdd={this.props.onAdd} onClose={this.closePopup}/>
                             </PopupDom>
                         }
-                        <button className="table" onClick={this.onSave}>저장</button>
+                        <button className="table" onClick={function(e){
+                            e.preventDefault();
+                            this.props.onSave();
+                        }.bind(this)}>저장</button>
                     </div>
                 </form>
             

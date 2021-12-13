@@ -21,11 +21,11 @@ class Login extends Component{
 
     handleLoginSubmit = (e)=>{
         e.preventDefault();
-        console.log(e.target.id.value);
+        // console.log(e.target.id.value);
         if(e.target.id.value==="") alert("학번을 입력하세요");
         else if(e.target.pwd.value==="") alert("비밀번호를 입력하세요");
         else{
-            axios.post("http://210.117.182.234:8080/~s201912352/login.php",
+            axios.post("http://210.117.182.234:8081/~s201912352/login.php",
             {
                 id:this.state.id,
                 pwd:this.state.pwd
@@ -52,7 +52,7 @@ class Login extends Component{
         else if(e.target.grade.value==="") alert("학년을 입력하세요");
         else if(e.target.pwd.value==="") alert("비밀번호를 입력하세요");
         else{
-            axios.post("http://210.117.182.234:8080/~s201912352/register.php",
+            axios.post("http://210.117.182.234:8081/~s201912352/register.php",
             {
                 id:this.state.id,
                 name:this.state.name,
@@ -61,8 +61,8 @@ class Login extends Component{
             }).then(function(response){
                 console.log(response);
                 if(response.data.result === "fail") alert("회원가입 실패");
-                else alert("회원가입");
-                // else window.location.href="/?student_id="+response.data.result.student_id;
+                // else alert("회원가입");
+                else window.location.href="/login";
             });
 
         }
