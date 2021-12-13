@@ -8,19 +8,22 @@ class Content extends Component{
         super(props);
         this.state={
             login:{},
+            orginData:[],
             data:[]
         }
         if(props.id < 3){
             var student_id = new URLSearchParams(window.location.search).get('student_id');
             axios.post("http://210.117.182.234:8080/~s201912352/takes.php",{id:student_id})
             .then(function(response){
-                console.log(response.data.result);
+                console.log(response.data);
                 var list = response.data.result;
-                for(var i = 0;i<list.length;i++){
-                    list[i].id= i;
-                    list[i].key = i;
-                }
-                this.onAddAll(list);
+                if(list !== "fail"){
+                    for(var i = 0;i<list.length;i++){
+                        list[i].id= i;
+                        list[i].key = i;
+                    }
+                    this.onAddAll(list);
+                }  
                 
             }.bind(this));
         }
@@ -32,13 +35,18 @@ class Content extends Component{
     }
 
     onAddAll = (dataList) => {
-        this.setState({data : dataList});
+        this.setState({
+            data : dataList,
+            orginData : dataList
+        });
         console.log(this.state.data);
     }
 
     onAdd = (newData) => {
         var _data = this.state.data;
-        _data.push(newData);
+        for(var i = 0 ;i<newData.length;i++){
+            _data.push(newData[i]);
+        }
         this.setState({data:_data});
     }
 
@@ -55,6 +63,16 @@ class Content extends Component{
         }
         console.log(list);
         this.setState({data:list});
+    }
+
+    onSave = () => {
+        var _data = this.state.data;
+        var _origin = this.state.orginData;
+        var insert = [];
+        var remove = [];
+        insert = _data.filter(x=>!_origin.includes(x));
+        remove = _origin.filter(x=>!_data.includes(x));
+        
     }
 
     render(){
@@ -95,11 +113,11 @@ class Content extends Component{
                                         </tr>
                                     </tbody>
                                 </table>
-                                <Table data={this.state.data} onAdd={this.onAdd} onDelete={this.onDelete}></Table>
+                                <Table data={this.state.data} onAdd={this.onAdd} onDelete={this.onDelete} onSave={this.onSave}></Table>
                             </div>;
                 break;
             case 2:
-                _content = <Table data={this.state.data} onAdd={this.onAdd} onDelete={this.onDelete}></Table>;
+                _content = <Table data={this.state.data} onAdd={this.onAdd} onDelete={this.onDelete} onSave={this.onSave}></Table>;
                 break;
             case 3:
                 _content = <Login id={this.props.id} onLogin={this.onLogin} onAddAll={this.onAddAll}></Login>;
