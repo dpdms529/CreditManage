@@ -34,10 +34,12 @@ class Table extends Component{
         var data = this.props.data;
         var list = [];
         for(var i=0; i<data.length; i++){
+            var abeekStr = data[i].abeek_name1 + " " + data[i].abeek_name2;
+            if(data[i].abeek_cd1 !== "" && data[i].abeek_cd2 !== "" && data[i].abeek_cd1 > data[i].abeek_cd2) abeekStr = data[i].abeek_name2 + " " + data[i].abeek_name1;
             list.push(                        
             <tr key={data[i].id}>
                 <td>{data[i].division_name}</td>
-                <td>{data[i].abeek_name}</td>
+                <td>{abeekStr}</td>
                 <td>{data[i].title}</td>
                 <td>{data[i].year}</td>
                 <td>{data[i].semester}</td>

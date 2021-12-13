@@ -37,7 +37,7 @@ class Popup extends Component{
         e.preventDefault();
         console.log(this.state.content, this.state.year, this.state.division, this.state.abeek_bsm, this.state.abeek_liberal, this.state.abeek_tech, this.state.abeek_design);
 
-        axios.post("http://210.117.182.234:8080/~s201912352/search.php",
+        axios.post("http://210.117.182.234:8080/~s201912352/search2.php",
         {
             content:this.state.content, // 검색어
             division:this.state.division,
@@ -59,43 +59,28 @@ class Popup extends Component{
         var propsData = this.props.data;
         var data = this.state.data;
         var len = propsData.length;
-        var _id = len===0?1:propsData[len-1].id+1;
+        var _id = len===0?0:propsData[len-1].id+1;
         var list = [];
         for(var i = 0;i<data.length;i++) {
-            if(i !== data.length-1 && data[i].course_id === data[i+1].course_id && data[i].year === data[i+1].year && data[i].semester === data[i+1].semester) {
-                list.push(
-                    <tr key = {i}>
-                        <td>{data[i].course_id}</td>
-                        <td>{data[i].title}</td>
-                        <td>{data[i].division_name}</td>
-                        <td>{data[i].abeek_name + "\n" + data[i+1].abeek_name}</td>
-                        <td>{data[i].year}</td>
-                        <td>{data[i].semester}</td>
-                        <td>{data[i].credit}</td>
-                        <td><button id={i} onClick={function(e){
-                            e.preventDefault();
-                            this.props.onAdd({id:_id, division_name: data[e.target.id].division_name ,abeek_name: `${data[e.target.id].abeek_name + data[e.target.id+1].abeek_name}` , title:data[e.target.id].title, year: data[e.target.id].year, semester:data[e.target.id].semester, credit: data[e.target.id].credit, GP:'A+'});
-                        }.bind(this)}>추가</button></td>
-                    </tr>
-                )
-                i++;
-            } else {
-                list.push(
-                    <tr key = {i}>
-                        <td>{data[i].course_id}</td>
-                        <td>{data[i].title}</td>
-                        <td>{data[i].division_name}</td>
-                        <td>{data[i].abeek_name}</td>
-                        <td>{data[i].year}</td>
-                        <td>{data[i].semester}</td>
-                        <td>{data[i].credit}</td>
-                        <td><button id={i} onClick={function(e){
-                            e.preventDefault();
-                            this.props.onAdd({id:_id, division_name: data[e.target.id].division_name ,abeek_name: data[e.target.id].abeek_name,title:data[e.target.id].title,year: data[e.target.id].year, semester:data[e.target.id].semester, credit: data[e.target.id].credit, GP:'A+'});
-                        }.bind(this)}>추가</button></td>
-                    </tr>
-                )
-            }
+            if(i > 0 && data[i].course_id === data[i-1].course_id && data[i].year === data[i-1].year && data[i].semester === data[i-1].semester) continue;
+            list.push(
+                <tr key = {i}>
+                    <td>{data[i].course_id}</td>
+                    <td>{data[i].title}</td>
+                    <td>{data[i].division_name}</td>
+                    <td>{data[i].abeek_name1 + " " + data[i].abeek_name2}</td>
+                    <td>{data[i].year}</td>
+                    <td>{data[i].semester}</td>
+                    <td>{data[i].credit}</td>
+                    <td><button id={i} onClick={function(e){
+                        e.preventDefault();
+                        data[e.target.id].id = _id;
+                        data[e.target.id].key = _id;
+                        data[e.target.id].GP = 'A+';
+                        this.props.onAdd([data[e.target.id]]);
+                    }.bind(this)}>추가</button></td>
+                </tr>
+            )
 
         }
         return (
@@ -116,10 +101,10 @@ class Popup extends Component{
                             <label className="popup">이수구분</label>
                             <select size="1"onChange={this.handleChange} name="division">
                                 <option>전체</option>
-                                <option>전공필수</option>
-                                <option>전공선택</option>
-                                <option>교양</option>
-                                <option>일반선택</option>
+                                <option value='02'>전공필수</option>
+                                <option value='03'>전공선택</option>
+                                <option value='01'>교양</option>
+                                <option value='05'>일반선택</option>
                             </select>
                             <label className="popup">공학구분</label>
                             <span className="popup checkbox">
