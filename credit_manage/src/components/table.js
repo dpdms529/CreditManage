@@ -9,7 +9,7 @@ class Table extends Component{
         super(props);
         this.state = {
             isOpenPopup: false,
-            self_insert: [],
+            student_id : '201912352',
             subject: []
         };
     }
@@ -27,20 +27,24 @@ class Table extends Component{
 
     onSave = (e) => {
         e.preventDefault();
+        console.log("props: ", this.props.data);
         this.setState({
             subject: this.props.data
+        }, () => {
+            console.log('[post] subject:', this.state.subject);
+            axios.post("http://210.117.182.234:8080/~s201912352/manage_save.php",
+            {
+                subject: this.state.subject,
+                student_id :this.state.student_id
+            }).then((response) => {
+                console.log("response:", response.data);
+                this.setState({
+                    student_id: this.state.student_id,
+                    data: response.data.result
+                })
+            });
         })
-        console.log(this.state.subject);
-        axios.post("http://210.117.182.234:8080/~s201912352/manage_save.php",
-        {
-            subejct: this.state.subject,
-            self: this.state.self_insert
-        }).then((response) => {
-            console.log(response.data);
-            this.setState({
-                data: response.data.result
-            })
-        });
+
 
     }
 

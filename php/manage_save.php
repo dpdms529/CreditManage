@@ -15,47 +15,47 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 $student_id = $data['student_id'];
 
-$self = $data['self'];
-$self_count = count($self['self_insert']);
-$complete = 'True';
-$status = 0;
+// $self = $data['self'];
+// $self_count = count($self['self_insert']);
+// $complete = 'True';
+// $status = 0;
 
-# course -> section -> takes
-if($self_count == 0) {
-    $status += 1;
-} else {
-    for($i =0; $i<$self_count; $i++) {
+// # course -> section -> takes
+// if($self_count == 0) {
+//     $status += 1;
+// } else {
+//     for($i =0; $i<$self_count; $i++) {
 
-        $self_year = $self[$i]['year'];
-        $self_semester = $self[$i]['semester'];
-        $self_courseID = $self[$i]['courseID'];
-        $self_title = $self[$i]['title'];
-        $self_credit = $self[$i]['credit'];
-        $self_divisionCD = $self[$i]['division_cd'];
-        $self_GPA = $self[$i]['GPA'];
+//         $self_year = $self[$i]['year'];
+//         $self_semester = $self[$i]['semester'];
+//         $self_courseID = $self[$i]['courseID'];
+//         $self_title = $self[$i]['title'];
+//         $self_credit = $self[$i]['credit'];
+//         $self_divisionCD = $self[$i]['division_cd'];
+//         $self_GPA = $self[$i]['GPA'];
     
-        $insert_into_takes = "insert into takes values ($self_year, $self_semester, '$self_courseID', '$student_id', '$self_GPA', T);"
-        $insert_into_course = "insert into takes values ('$self_courseID', '$self_title', $self_credit);"
-        $insert_into_section = "insert into takes values ($self_year, $semester, '$self_courseID', '$self_divisionCD');"
-        if(!empty($self_courseID))
-        {
-            if(mysqli_query($conn, $insert_into_course)) {
-                if(mysqli_query($conn, $insert_into_section)) {
-                    if(mysqli_query($conn, $insert_into_takes)) {
-                        $status += 1;
-                    } else {
-                        echo "failed to insert data into takes table"
-                    }
-                } else {
-                    echo "failed to insert data into section table."
-                }
-            } else {
-                echo "failed to insert data into course table";
-            }
-        }
+//         $insert_into_takes = "insert into takes values ($self_year, $self_semester, '$self_courseID', '$student_id', '$self_GPA', T);"
+//         $insert_into_course = "insert into takes values ('$self_courseID', '$self_title', $self_credit);"
+//         $insert_into_section = "insert into takes values ($self_year, $semester, '$self_courseID', '$self_divisionCD');"
+//         if(!empty($self_courseID))
+//         {
+//             if(mysqli_query($conn, $insert_into_course)) {
+//                 if(mysqli_query($conn, $insert_into_section)) {
+//                     if(mysqli_query($conn, $insert_into_takes)) {
+//                         $status += 1;
+//                     } else {
+//                         echo "failed to insert data into takes table"
+//                     }
+//                 } else {
+//                     echo "failed to insert data into section table."
+//                 }
+//             } else {
+//                 echo "failed to insert data into course table";
+//             }
+//         }
         
-    }
-}
+//     }
+// }
 
 
 
