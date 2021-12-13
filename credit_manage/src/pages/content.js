@@ -121,6 +121,8 @@ class Content extends Component{
             var result = response.data.result;
             if(result === "success"){
                 alert("저장 성공!");
+                var student_id = new URLSearchParams(window.location.search).get('student_id');
+                window.location.href="/manage?student_id="+ student_id;
             }else{
                 console.log(result);
                 alert("저장 실패!");
