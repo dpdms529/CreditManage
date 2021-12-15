@@ -51,6 +51,7 @@ class Content extends Component{
                         //     result3[i].key = j;
                         // }
                         this.onAddAll(result1,list,result3);
+                        this.onCalc();
                     }  
 
                 })
