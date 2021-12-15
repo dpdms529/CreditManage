@@ -10,7 +10,8 @@ class Table extends Component{
             isOpenPopup: false,
             isOpenResult: false,
             self_insert: [],
-            subject: []
+            subject: [],
+            credit: this.props.credit
         };
     }
 
@@ -115,7 +116,7 @@ class Table extends Component{
                         }.bind(this)}>추가</button>
                         {this.state.isOpenPopup &&
                             <PopupDom>
-                                <Popup id={this.props.id} data={data} onAdd={this.props.onAdd} onClose={this.closePopup}/>
+                                <Popup id={this.props.id} data={data} onAdd={this.props.onAdd} onClose={this.closePopup} credit={this.props.credit}/>
                             </PopupDom>
                         }
                         {_button}

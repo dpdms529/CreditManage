@@ -28,13 +28,6 @@ class Popup extends Component{
 
     }
 
-    handleChange = (e) => {
-        this.setState({
-            [e.target.name] : e.target.value
-        })
-        console.log(e.target.value);
-    }
-
     handleSubmit = (e) => {
         e.preventDefault();
         console.log(this.state.content, this.state.year, this.state.division, this.state.abeek_bsm, this.state.abeek_liberal, this.state.abeek_tech, this.state.abeek_design);
@@ -57,9 +50,53 @@ class Popup extends Component{
 
     }
 
-    onCreditChange = (e) => {
-        e.preventDefault();
-        console.log(this.state.data)
+    isAvailable = () => {
+        var _required = '만족', _selection = '만족', _liberal = '만족', _abeek_bsm = '만족', _abeek_liberal = '만족', _abeek_tech = '만족', _abeek_design = '만족', _total = '만족';
+        var C_required = 'green', C_selection = 'green', C_liberal = 'green', C_abeek_bsm = 'green', C_abeek_liberal = 'green', C_abeek_tech = 'green', C_abeek_design = 'green', C_total = 'green';
+        var total = 0;
+        if(this.state.credit.required < Number(this.props.criteria[5].criteria_credit)) {
+            _required = "불만족";
+            C_required = 'red';
+            total += this.state.credit.required;
+        }
+        else total += Number(this.props.criteria[4].criteria_credit);
+
+        if(this.state.credit.selection < Number(this.props.criteria[6].criteria_credit)) {
+            _selection = '불만족';
+            C_selection = 'red';
+            total += this.state.credit.selection;
+        }
+        else total += Number(this.props.criteria[5].criteria_credit);
+
+        if(this.state.credit.liberal < Number(this.props.criteria[3].criteria_credit)) {
+            _liberal = '불만족';
+            C_liberal = 'red';
+            total += this.state.credit.liberal;
+        }
+        else total += Number(this.props.criteria[3].criteria_credit);
+        
+        total += Number(this.state.credit.general_common);
+
+        if(this.state.credit.abeek_bsm < this.props.criteria[7].criteria_credit) { _abeek_bsm = '불만족'; C_abeek_bsm = 'red'; }
+        if(this.state.credit.abeek_liberal < this.props.criteria[8].criteria_credit) { _abeek_liberal = '불만족'; C_abeek_liberal = 'red'; }
+        if(this.state.credit.abeek_tech < this.props.criteria[10].criteria_credit) { _abeek_tech = '불만족'; C_abeek_tech = 'red'; }
+        if(this.state.credit.abeek_design < this.props.criteria[9].criteria_credit) { _abeek_design = '불만족'; C_abeek_design = 'red'; }
+
+        if(total < Number(this.props.criteria[11].criteria_credit)) { _total = '불만족'; C_total = 'red'; }
+        console.log("total:",total)
+        
+        return <tr>
+                    <th className="result" style={{color:`${C_required}`}}>{_required}</th>
+                    <th className="result" style={{color:`${C_selection}`}}>{_selection}</th>
+                    <th className="result" style={{color:`${C_liberal}`}}>{_liberal}</th>
+                    <th className="result"></th>
+                    <th className="result" style={{borderRight:"1px grey solid", color:`${C_total}`}}>{_total}</th>
+                    <th className="result" style={{color:`${C_abeek_bsm}`}}>{_abeek_bsm}</th>
+                    <th className="result" style={{color:`${C_abeek_liberal}`}}>{_abeek_liberal}</th>
+                    <th className="result" style={{color:`${C_abeek_tech}`}}>{_abeek_tech}</th>
+                    <th className="result" style={{color:`${C_abeek_design}`}}>{_abeek_design}</th>
+                </tr>;
+
     }
 
     render(){
@@ -283,19 +320,19 @@ class Popup extends Component{
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{this.state.credit.required}/{this.props.criteria[4].criteria_credit}</td>
-                                            <td>{this.state.credit.selection}/{this.props.criteria[5].criteria_credit}</td>
+                                            <td>{this.state.credit.required}/{this.props.criteria[5].criteria_credit}</td>
+                                            <td>{this.state.credit.selection}/{this.props.criteria[6].criteria_credit}</td>
                                             <td>{this.state.credit.liberal}/{this.props.criteria[3].criteria_credit}</td>
                                             <td>{this.state.credit.general_common}</td>
-                                            <td style={{borderRight:"1px white solid"}}>{this.state.credit.total}/{this.props.criteria[10].criteria_credit}</td>
-                                            <td>{this.state.credit.abeek_bsm}/{this.props.criteria[6].criteria_credit}</td>
-                                            <td>{this.state.credit.abeek_liberal}/{this.props.criteria[7].criteria_credit}</td>
-                                            <td>{this.state.credit.abeek_tech}/{this.props.criteria[9].criteria_credit}</td>
-                                            <td>{this.state.credit.abeek_design}/{this.props.criteria[8].criteria_credit}</td>
+                                            <td style={{borderRight:"1px grey solid"}}>{this.state.credit.total}/{this.props.criteria[11].criteria_credit}</td>
+                                            <td>{this.state.credit.abeek_bsm}/{this.props.criteria[7].criteria_credit}</td>
+                                            <td>{this.state.credit.abeek_liberal}/{this.props.criteria[8].criteria_credit}</td>
+                                            <td>{this.state.credit.abeek_tech}/{this.props.criteria[10].criteria_credit}</td>
+                                            <td>{this.state.credit.abeek_design}/{this.props.criteria[9].criteria_credit}</td>
                                         </tr>
+                                        {this.isAvailable()}
                                     </tbody>
                                 </table>
-                                <div>졸업 가능</div>
                             </form>
                             <button className="popup close" onClick={this.props.onClose}>닫기</button>
                         </div>
