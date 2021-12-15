@@ -21,7 +21,7 @@ class Content extends Component{
                         axios.post("http://210.117.182.234:8081/~s201912352/criteria.php",{year:year})
             ]).then(
                 axios.spread((res1, res2, res3)=>{
-                    console.log(res1.data.result, res2.data.result, res3.data.result);
+                    console.log(res1.data.result, res2.data.result, res3.data);
                     var result1 = res1.data.result;
                     var result2 = res2.data.result;
                     var result3 = res3.data.result;
@@ -64,7 +64,16 @@ class Content extends Component{
     onAdd = (newData) => {
         var _data = this.state.data;
         for(var i = 0 ;i<newData.length;i++){
-            _data.push(newData[i]);
+            var check = false;
+            for(var j = 0;j<_data.length;j++){
+                if(newData[i].course_id === _data[j].course_id && newData[i].year === _data[j].year && newData[i].semester === _data[j].semester) check = true;
+            }
+            if(check){
+                alert("이미 추가된 과목입니다.");
+            }else{
+                _data.push(newData[i]);
+            }
+            
         }
         this.setState({data:_data});
     }
@@ -169,11 +178,11 @@ class Content extends Component{
                                         </tr>
                                     </tbody>
                                 </table>
-                                <Table data={this.state.data} onAdd={this.onAdd} onDelete={this.onDelete} onSave={this.onSave}></Table>
+                                <Table id={this.props.id} data={this.state.data} origin={this.state.orginData} onAdd={this.onAdd} onDelete={this.onDelete} onSave={this.onSave}></Table>
                             </div>;
                 break;
             case 2:
-                _content = <Table data={this.state.data} onAdd={this.onAdd} onDelete={this.onDelete} onSave={this.onSave}></Table>;
+                _content = <Table id={this.props.id} data={this.state.data} origin={this.state.orginData} onAdd={this.onAdd} onDelete={this.onDelete} onSave={this.onSave}></Table>;
                 break;
             case 3:
                 _content = <Login id={this.props.id} onLogin={this.onLogin} onAddAll={this.onAddAll}></Login>;

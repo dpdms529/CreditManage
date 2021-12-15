@@ -49,3 +49,7 @@ span.checkbox{
 td {
     white-space: pre-line;
 }
+
+th.result{
+    width: 10%;
+}

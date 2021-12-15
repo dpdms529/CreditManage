@@ -76,7 +76,7 @@ $query = "select a.course_id, a.title, a.year, a.semester, a.credit, a.division_
                 where ca.course_id = sa.course_id and a.course_id = ca.course_id and d.division_cd = sa.division_cd and a.abeek_cd = ac.abeek_cd ) b
             where a.course_id = b.course_id and a.year = b.year and a.semester = b.semester
             group by a.course_id, a.title, a.year, a.semester, a.credit, a.division_cd, a.division_name, a.abeek_cd
-            order by a.year, a.semester, a.course_id, a.abeek_cd";
+            order by a.year desc, a.semester, a.course_id, a.abeek_cd";
 
 header('Content-Type:application/json');
 header('Access-Control-Allow-Origin:*');

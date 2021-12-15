@@ -38,7 +38,8 @@ if($result = mysqli_query($conn, $query)){
 }else{
     echo "{";
         echo "\"status\":\"OK\",";
-        echo "\"result\":\"fail\"";
+        echo "\"result\":\"fail\",";
+        echo "\"error\" :".mysqli_error($conn);
     echo "}";
 }
 

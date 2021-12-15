@@ -26,7 +26,7 @@ if(!empty($insert)){
         $semester = $insert[$i]['semester'];
         $course_id = $insert[$i]['course_id'];
         $GP = $insert[$i]['GP'];
-        $query = $query."(\"$year\", \"$semester\", \"$course_id\", \"$id\", \"$GP\", 1),";
+        $query = $query."(\"$year\", \"$semester\", \"$course_id\", \"$id\", \"$GP\"),";
     }
     
     $query = substr($query, 0, strlen($abeek)-1);
