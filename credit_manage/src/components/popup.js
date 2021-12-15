@@ -32,7 +32,7 @@ class Popup extends Component{
         e.preventDefault();
         console.log(this.state.content, this.state.year, this.state.division, this.state.abeek_bsm, this.state.abeek_liberal, this.state.abeek_tech, this.state.abeek_design);
 
-        axios.post("http://210.117.182.234:8081/~s201912352/search2.php",
+        axios.post("http://210.117.182.234:8081/~s201912352/search.php",
         {
             content:this.state.content, // 검색어
             division:this.state.division,
@@ -106,14 +106,13 @@ class Popup extends Component{
         var _id = len===0?0:propsData[len-1].id+1;
         var list = [];
         for(var i = 0;i<data.length;i++) {
-            if(i > 0 && data[i].course_id === data[i-1].course_id && data[i].year === data[i-1].year && data[i].semester === data[i-1].semester) continue;
             if(this.props.id === 1){
                 list.push(
                     <tr key = {i}>
                         <td>{data[i].course_id}</td>
                         <td>{data[i].title}</td>
                         <td>{data[i].division_name}</td>
-                        <td>{data[i].abeek_name1 + " " + data[i].abeek_name2}</td>
+                        <td>{data[i].abeek_name1 + "\n" + data[i].abeek_name2}</td>
                         <td>{data[i].year}</td>
                         <td>{data[i].semester}</td>
                         <td>{data[i].credit}</td>
@@ -145,7 +144,7 @@ class Popup extends Component{
                         <td>{data[i].course_id}</td>
                         <td>{data[i].title}</td>
                         <td>{data[i].division_name}</td>
-                        <td>{data[i].abeek_name1 + " " + data[i].abeek_name2}</td>
+                        <td>{data[i].abeek_name1 + "\n" + data[i].abeek_name2}</td>
                         <td><input name="year" type="number" min={2021} defaultValue={2021} style={{width:"60px"}} onChange={this.handleChange}></input></td>
                         <td>{data[i].semester}</td>
                         <td>{data[i].credit}</td>
