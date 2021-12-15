@@ -9,6 +9,7 @@ class Popup extends Component{
             content:"", // 검색어
             division:"", //이숙구분
             year:this.props.id===1?"전체":"2021",
+            GP:'A+',
             abeek_bsm:false, // BSM
             abeek_liberal:false, // 전문교양
             abeek_tech:false, // 공학주제
@@ -73,11 +74,24 @@ class Popup extends Component{
                         <td>{data[i].year}</td>
                         <td>{data[i].semester}</td>
                         <td>{data[i].credit}</td>
+                        <td>
+                            <select size="1" onChange={this.handleChange} name="GP">
+                                <option>A+</option>
+                                <option>A</option>
+                                <option>B+</option>
+                                <option>B</option>
+                                <option>C+</option>
+                                <option>C</option>
+                                <option>D</option>
+                                <option>D+</option>
+                                <option>F</option>
+                            </select>
+                        </td>
                         <td><button id={i} onClick={function(e){
                             e.preventDefault();
                             data[e.target.id].id = _id;
                             data[e.target.id].key = _id;
-                            data[e.target.id].GP = 'A+';
+                            data[e.target.id].GP = this.state.GP;
                             this.props.onAdd([data[e.target.id]]);
                         }.bind(this)}>추가</button></td>
                     </tr>
@@ -92,11 +106,24 @@ class Popup extends Component{
                         <td><input name="year" type="number" min={2021} defaultValue={2021} style={{width:"60px"}} onChange={this.handleChange}></input></td>
                         <td>{data[i].semester}</td>
                         <td>{data[i].credit}</td>
+                        <td>
+                            <select size="1" onChange={this.handleChange} name="GP">
+                                <option>A+</option>
+                                <option>A</option>
+                                <option>B+</option>
+                                <option>B</option>
+                                <option>C+</option>
+                                <option>C</option>
+                                <option>D</option>
+                                <option>D+</option>
+                                <option>F</option>
+                            </select>
+                        </td>
                         <td><button id={i} onClick={function(e){
                             e.preventDefault();
                             data[e.target.id].id = _id;
                             data[e.target.id].key = _id;
-                            data[e.target.id].GP = 'A+';
+                            data[e.target.id].GP = this.state.GP;
                             data[e.target.id].year = this.state.year;
                             this.props.onAdd([data[e.target.id]]);
                         }.bind(this)}>추가</button></td>
@@ -160,6 +187,7 @@ class Popup extends Component{
                                             <th>개설년도</th>
                                             <th>개설학기</th>
                                             <th>학점</th>
+                                            <th>등급</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -211,9 +239,10 @@ class Popup extends Component{
                                             <th>과목명</th>
                                             <th>이수구분</th>
                                             <th>공학인증</th>
-                                            <th>예상년도</th>
-                                            <th>개설학기</th>
+                                            <th>예상연도</th>
+                                            <th>예상학기</th>
                                             <th>학점</th>
+                                            <th>등급</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -231,7 +260,7 @@ class Popup extends Component{
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th className="result" colSpan="5" style={{borderRight:"1px white solid"}}>졸업구분</th>
+                                            <th className="result" colSpan="5" style={{borderRight:"1px grey solid"}}>졸업구분</th>
                                             <th className="result" colSpan="4">공학인증 구분</th>
                                         </tr>
                                         <tr>
@@ -239,7 +268,7 @@ class Popup extends Component{
                                             <th className="result">전공선택</th>
                                             <th className="result">교양</th>
                                             <th className="result">공필/일선</th>
-                                            <th className="result" style={{borderRight:"1px white solid"}}>취득학점</th>
+                                            <th className="result" style={{borderRight:"1px grey solid"}}>취득학점</th>
                                             <th className="result">BSM</th>
                                             <th className="result">전문교양</th>
                                             <th className="result">공학주제</th>
@@ -252,7 +281,7 @@ class Popup extends Component{
                                             <td>0</td>
                                             <td>0</td>
                                             <td>0</td>
-                                            <td style={{borderRight:"1px white solid"}}>0/140</td>
+                                            <td style={{borderRight:"1px grey solid"}}>0/140</td>
                                             <td>0</td>
                                             <td>0</td>
                                             <td>0</td>
