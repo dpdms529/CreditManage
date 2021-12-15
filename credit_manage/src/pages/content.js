@@ -20,8 +20,7 @@ class Content extends Component{
                 "general_common" : 0,
                 "liberal" : 0,
                 "total" : 0
-            },
-            criteria:[]
+            }
         }
         if(props.id < 3){
             var student_id = new URLSearchParams(window.location.search).get('student_id');
@@ -38,6 +37,7 @@ class Content extends Component{
                     var result3 = res3.data.result;
                     console.log(result3);
                     var list = [];
+                    var clist = [];
                     var _id = 0;
                     if(result1 !== "fail" && result2 !== "fail" && result3 !== "fail"){
                         for(var i = 0;i<result2.length;i++){
@@ -47,10 +47,11 @@ class Content extends Component{
                             list.push(result2[i]);
                             _id++;
                         }
-                        // for(var j = 0;j<result3.length;j++){
-                        //     result3[i].key = j;
-                        // }
-                        this.onAddAll(result1,list,result3);
+                        for(var j = 0;j<result3.length;j++){
+                            result3[j].key = j;
+                            clist.push(result3[j]);
+                        }
+                        this.onAddAll(result1,list,clist);
                         this.onCalc();
                     }  
 
@@ -70,7 +71,8 @@ class Content extends Component{
             orginData : _data,
             criteria : criteriaList
         });
-        console.log(this.state.data);
+        console.log(this.state.data[0]);
+        //console.log("criteria:",this.state.criteria[10]);
     }
 
     onAdd = (newData) => {
@@ -218,6 +220,7 @@ class Content extends Component{
                     _credit.general_common += parseFloat(_data[i].credit);
                     _credit.total += parseFloat(_data[i].credit);
                     break;
+                default:
             }
         }
 
@@ -229,6 +232,13 @@ class Content extends Component{
     }
 
     render(){
+
+        var {criteria} = this.state;
+        if(!criteria){
+            return null;
+        }
+        console.log(criteria[10].criteria_credit);
+
         var _content = null;
         switch(this.props.id){
             case 1:
@@ -253,15 +263,15 @@ class Content extends Component{
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td className="criteria">{this.state.credit.required}</td>
-                                            <td className="criteria">{this.state.credit.selection}</td>
-                                            <td className="criteria">{this.state.credit.liberal}</td>
+                                            <td className="criteria">{this.state.credit.required}/{this.state.criteria[4].criteria_credit}</td>
+                                            <td className="criteria">{this.state.credit.selection}/{this.state.criteria[5].criteria_credit}</td>
+                                            <td className="criteria">{this.state.credit.liberal}/{this.state.criteria[3].criteria_credit}</td>
                                             <td className="criteria">{this.state.credit.general_common}</td>
-                                            <td className="criteria" style={{borderRight:"1px white solid"}}>{this.state.credit.total}/140</td>
-                                            <td className="criteria">{this.state.credit.abeek_bsm}</td>
-                                            <td className="criteria">{this.state.credit.abeek_liberal}</td>
-                                            <td className="criteria">{this.state.credit.abeek_tech}</td>
-                                            <td className="criteria">{this.state.credit.abeek_design}</td>
+                                            <td className="criteria" style={{borderRight:"1px white solid"}}>{this.state.credit.total}/{this.state.criteria[10].criteria_credit}</td>
+                                            <td className="criteria">{this.state.credit.abeek_bsm}/{this.state.criteria[6].criteria_credit}</td>
+                                            <td className="criteria">{this.state.credit.abeek_liberal}/{this.state.criteria[7].criteria_credit}</td>
+                                            <td className="criteria">{this.state.credit.abeek_tech}/{this.state.criteria[9].criteria_credit}</td>
+                                            <td className="criteria">{this.state.credit.abeek_design}/{this.state.criteria[8].criteria_credit}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -272,7 +282,7 @@ class Content extends Component{
                 _content = <Table data={this.state.data} onAdd={this.onAdd} onDelete={this.onDelete} onSave={this.onSave}></Table>;
                 break;
             case 3:
-                _content = <Login id={this.props.id} onLogin={this.onLogin} onAddAll={this.onAddAll}></Login>;
+                _content = <Login id={this.props.id} onLogin={this.onLogin}></Login>;
                 break;
             case 4:
                 _content = <Login id={this.props.id}></Login>;
