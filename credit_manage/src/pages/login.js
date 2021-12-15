@@ -25,7 +25,7 @@ class Login extends Component{
         if(e.target.id.value==="") alert("학번을 입력하세요");
         else if(e.target.pwd.value==="") alert("비밀번호를 입력하세요");
         else{
-            axios.post("http://210.117.182.234:8080/~s201912352/login.php",
+            axios.post("http://210.117.182.234:8081/~s201912352/login.php",
             {
                 id:this.state.id,
                 pwd:this.state.pwd

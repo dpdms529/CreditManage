@@ -9,11 +9,22 @@ class Content extends Component{
         this.state={
             login:{},
             orginData:[],
-            data:[]
+            data:[],
+            credit:{
+                "abeek_bsm" : 0,
+                "abeek_tech" : 0,
+                "abeek_liberal" : 0,
+                "abeek_design" : 0,
+                "required" : 0,
+                "selection" : 0,
+                "general_common" : 0,
+                "liberal" : 0,
+                "total" : 0
+            }
         }
         if(props.id < 3){
             var student_id = new URLSearchParams(window.location.search).get('student_id');
-            axios.post("http://210.117.182.234:8080/~s201912352/takes.php",{id:student_id})
+            axios.post("http://210.117.182.234:8081/~s201912352/takes.php",{id:student_id})
             .then(function(response){
                 console.log(response.data);
                 var list = response.data.result;
@@ -23,6 +34,7 @@ class Content extends Component{
                         list[i].key = i;
                     }
                     this.onAddAll(list);
+                    this.onCalc();
                 }  
                 
             }.bind(this));
@@ -75,8 +87,92 @@ class Content extends Component{
         
     }
 
-    render(){
+    onCalc = () => {
+        var _data = this.state.data;
+        var _credit = {
+            "abeek_bsm" : 0,
+            "abeek_tech" : 0,
+            "abeek_liberal" : 0,
+            "abeek_design" : 0,
+            "required" : 0.0,
+            "selection" : 0.0,
+            "general_common" : 0.0,
+            "liberal" : 0.0,
+            "total": 0.0
+        }
 
+        for(var i = 0; i<_data.length; i++) {
+            switch (_data[i].abeek_cd1) {
+                case '01': // bsm
+                    _credit.abeek_bsm += Number(_data[i].abeek_credit1);
+                    break;
+                case '02': //공학주제
+                    _credit.abeek_tech += Number(_data[i].abeek_credit1);
+                    break;
+                case '03': // 전문교양
+                    _credit.abeek_liberal += Number(_data[i].abeek_credit1);
+                    break;
+                case '041':
+                case '042':
+                case '043': // 설계
+                    _credit.abeek_design += Number(_data[i].abeek_credit1);
+                    break;
+                default:
+                    break;
+            }
+            switch (_data[i].abeek_cd2) {
+                case '01': // bsm
+                    _credit.abeek_bsm += Number(_data[i].abeek_credit2);
+                    break;
+                case '02': //공학주제
+                    _credit.abeek_tech += Number(_data[i].abeek_credit2);
+                    break;
+                case '03': // 전문교양
+                    _credit.abeek_liberal += Number(_data[i].abeek_credit2);
+                    break;
+                case '041':
+                case '042':
+                case '043': // 설계
+                    _credit.abeek_design += Number(_data[i].abeek_credit2);
+                    break;
+                default:
+                    break;
+            }
+            switch(_data[i].division_cd) {
+                case '011':
+                case '012':
+                case '013':
+                case '014': // 교양
+                    _credit.liberal += parseFloat(_data[i].credit);
+                    _credit.total += parseFloat(_data[i].credit);
+                    break;
+                case '02': // 전필
+                    _credit.required += parseFloat(_data[i].credit);
+                    _credit.total += parseFloat(_data[i].credit);
+                    break;
+                case '03': // 전선
+                    _credit.selection += parseFloat(_data[i].credit);
+                    _credit.total += parseFloat(_data[i].credit);
+                    break;
+                case '04': // 공필
+                    _credit.general_common += parseFloat(_data[i].credit);
+                    _credit.total += parseFloat(_data[i].credit);
+                    break;
+                case '05': // 일선
+                    _credit.general_common += parseFloat(_data[i].credit);
+                    _credit.total += parseFloat(_data[i].credit);
+                    break;
+            }
+        }
+
+        this.setState({
+            credit : _credit
+        }, () => {
+            console.log(this.state.credit)
+        });
+    }
+
+    render(){
         var _content = null;
         switch(this.props.id){
             case 1:
@@ -101,15 +197,15 @@ class Content extends Component{
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td className="criteria">0</td>
-                                            <td className="criteria">0</td>
-                                            <td className="criteria">0</td>
-                                            <td className="criteria">0</td>
-                                            <td className="criteria" style={{borderRight:"1px white solid"}}>0/140</td>
-                                            <td className="criteria">0</td>
-                                            <td className="criteria">0</td>
-                                            <td className="criteria">0</td>
-                                            <td className="criteria">0</td>
+                                            <td className="criteria">{this.state.credit.required}</td>
+                                            <td className="criteria">{this.state.credit.selection}</td>
+                                            <td className="criteria">{this.state.credit.liberal}</td>
+                                            <td className="criteria">{this.state.credit.general_common}</td>
+                                            <td className="criteria" style={{borderRight:"1px white solid"}}>{this.state.credit.total}/140</td>
+                                            <td className="criteria">{this.state.credit.abeek_bsm}</td>
+                                            <td className="criteria">{this.state.credit.abeek_liberal}</td>
+                                            <td className="criteria">{this.state.credit.abeek_tech}</td>
+                                            <td className="criteria">{this.state.credit.abeek_design}</td>
                                         </tr>
                                     </tbody>
                                 </table>

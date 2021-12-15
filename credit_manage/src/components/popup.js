@@ -37,7 +37,7 @@ class Popup extends Component{
         e.preventDefault();
         console.log(this.state.content, this.state.year, this.state.division, this.state.abeek_bsm, this.state.abeek_liberal, this.state.abeek_tech, this.state.abeek_design);
 
-        axios.post("http://210.117.182.234:8080/~s201912352/search2.php",
+        axios.post("http://210.117.182.234:8081/~s201912352/search2.php",
         {
             content:this.state.content, // 검색어
             division:this.state.division,
