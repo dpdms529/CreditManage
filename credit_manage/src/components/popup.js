@@ -289,6 +289,7 @@ class Popup extends Component{
                                         </tr>
                                     </tbody>
                                 </table>
+                                <div>졸업 가능</div>
                             </form>
                             <button className="popup close" onClick={this.props.onClose}>닫기</button>
                         </div>

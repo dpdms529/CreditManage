@@ -24,7 +24,8 @@ header{
   border:3px gray solid;
   margin: 20px;
   padding: 20px;
-  min-height: 700px;
+  height: fit-content;
+  min-height: 500px;
 }
 
 .btn{
@@ -36,8 +37,8 @@ header{
   display:inline-block;
   width: 45%;
   height: 90%;
-  margin: 2%;
-  line-height: 600px;
+  margin: 2.5%;
+  line-height: 450px;
 }
 
 h2.title{
