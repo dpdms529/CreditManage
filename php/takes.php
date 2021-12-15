@@ -10,29 +10,26 @@ $dbname = "s201912352";
 
 $conn = mysqli_connect($servername,$username,$password,$dbname);
 
-$query = "select a.course_id, a.title, a.year, a.semester, a.credit, a.GP, a.division_cd, a.division_name, a.abeek_cd abeek_cd1, a.abeek_name abeek_name1, a.abeek_credit abeek_credit1,
-            min(case 
-                when a.abeek_cd = b.abeek_cd then null
-                else b.abeek_cd
-            end) abeek_cd2,
-            min(case 
-                when a.abeek_cd = b.abeek_cd then null
-                else b.abeek_name
-            end) abeek_name2,
-            min(case 
-                when a.abeek_cd = b.abeek_cd then null
-                else b.abeek_credit
-            end) abeek_credit2
-            from
-                (select ta.course_id, c.title, s.division_cd, d.division_name, ac.abeek_cd, ac.abeek_name, a.abeek_credit, ta.year, ta.semester, c.credit, ta.GP
-                from takes ta, section s,course c, division d, abeek a, abeek_code ac 
-                where ta.student_id = $id and s.course_id = c.course_id and ta.year = s.year and ta.semester = s.semester and ta.course_id = s.course_id and s.division_cd = d.division_cd and ta.course_id = a.course_id and a.abeek_cd = ac.abeek_cd) a,
-                (select ta.course_id, c.title, s.division_cd, d.division_name, ac.abeek_cd, ac.abeek_name, a.abeek_credit, ta.year, ta.semester, c.credit, ta.GP
-                from takes ta, section s,course c, division d, abeek a, abeek_code ac 
-                where ta.student_id = $id and s.course_id = c.course_id and ta.year = s.year and ta.semester = s.semester and ta.course_id = s.course_id and s.division_cd = d.division_cd and ta.course_id = a.course_id and a.abeek_cd = ac.abeek_cd) b
-            where a.course_id = b.course_id and a.year = b.year and a.semester = b.semester 
-            group by a.course_id, a.title, a.year, a.semester, a.credit, a.GP, a.division_cd, a.division_name, a.abeek_cd
-            order by a.year, a.semester, a.course_id, a.abeek_cd";
+$query = "select ca.student_id, ca.course_id, ca.title, ca.year, ca.semester, ca.division_cd, ca.division_name, ca.credit, ca.GP, min(ca.abeek_cd) abeek_cd1, min(ca.abeek_name) abeek_name1, min(ca.abeek_credit) abeek_credit1, max(cb.abeek_cd) abeek_cd2, max(cb.abeek_name) abeek_name2, max(cb.abeek_credit) abeek_credit2
+            from 
+                (select c.student_id, c.course_id, c.title, c.year, c.semester, c.division_cd, c.division_name, c.credit, c.GP, a.abeek_cd, a.abeek_credit, a.abeek_name
+                    from 
+                    (select t.student_id, c.course_id, c.title, s.year, s.semester, s.division_cd, d.division_name, c.credit, t.GP
+                        from course c, section s, takes t, division d 
+                        where c.course_id = s.course_id and s.course_id = t.course_id and s.year = t.year and s.semester = t.semester and  s.division_cd = d.division_cd and t.student_id = $id) c
+                    left outer join
+                    (select a.course_id, a.abeek_cd, a.abeek_credit, ac.abeek_name from abeek a, abeek_code ac where a.abeek_cd = ac.abeek_cd) a
+                    on c.course_id = a.course_id) ca 
+            left outer join
+                (select c.course_id, c.year, c.semester, a.abeek_cd, a.abeek_credit, a.abeek_name
+                    from 
+                    (select c.course_id, c.title, c.credit, s.year, s.semester, s.division_cd, d.division_name from course c, section s, division d where c.course_id = s.course_id and s.division_cd = d.division_cd) c
+                    left outer join
+                    (select a.course_id, a.abeek_cd, a.abeek_credit, ac.abeek_name from abeek a, abeek_code ac where a.abeek_cd = ac.abeek_cd) a
+                    on c.course_id = a.course_id) cb
+            on ca.course_id = cb.course_id and ca.year = cb.year and ca.semester = cb.semester and ca.abeek_cd != cb.abeek_cd
+            group by student_id, course_id, title, year, semester, division_cd, credit, GP
+            order by year desc, semester, course_id, min(ca.abeek_cd);";
 
 header('Content-Type:application/json;charset=utf-8');
 header('Access-Control-Allow-Origin:*');

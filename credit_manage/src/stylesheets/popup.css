@@ -3,8 +3,8 @@ div.popupWrapper{
     position:fixed;
     background-color: pink;
     top:20%;
-    left:5%;
-    width:90%;
+    left:2.5%;
+    width:95%;
     height: fit-content;
     display: inline-block;
     vertical-align: middle;

@@ -41,8 +41,7 @@ class Table extends Component{
         var origin = this.props.origin;
         var list = [];
         for(var i=0; i<data.length; i++){
-            var abeekStr = data[i].abeek_name1 + " " + data[i].abeek_name2;
-            if(data[i].abeek_cd1 !== "" && data[i].abeek_cd2 !== "" && data[i].abeek_cd1 > data[i].abeek_cd2) abeekStr = data[i].abeek_name2 + " " + data[i].abeek_name1;
+            var abeekStr = data[i].abeek_name1 + "\n" + data[i].abeek_name2;
             var check = false;
             for(var j = 0;j<origin.length;j++){
                 if(data[i].course_id === origin[j].course_id && data[i].year === origin[j].year && data[i].semester === origin[j].semester) check = true;
