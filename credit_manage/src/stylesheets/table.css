@@ -1,6 +1,7 @@
 form.table{
     background-color: skyblue;
     height:fit-content;
+    min-height: 400px;
 }
 
 table{
@@ -15,7 +16,7 @@ tr{
 th{
     padding-top:10px;
     padding-bottom: 20px;
-    width: 13%;
+    width: 10%;
 }
 
 td{
@@ -25,7 +26,7 @@ td{
 
 div.table{
     margin-left: 45%;
-    margin-top: 25%;
+    margin-top:5%;
 }
 
 button.table{
