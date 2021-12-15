@@ -36,10 +36,9 @@ class Login extends Component{
                 if(result === "fail") alert("로그인 실패");
                 else if(result === "not") alert("아이디/비밀번호를 다시 확인해주세요!");
                 else {
-                    this.props.onLogin(result);
                     window.location.href="/?student_id="+ result.student_id;
                 }
-            }.bind(this));
+            });
 
         }
     }
@@ -61,8 +60,10 @@ class Login extends Component{
             }).then(function(response){
                 console.log(response);
                 if(response.data.result === "fail") alert("회원가입 실패");
-                // else alert("회원가입");
-                else window.location.href="/login";
+                else {
+                    alert("회원가입 성공");
+                    window.location.href="/login";
+                }
             });
 
         }
