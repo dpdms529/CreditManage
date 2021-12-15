@@ -288,7 +288,7 @@ class Content extends Component{
                             </div>;
                 break;
             case 2:
-                _content = <Table id={this.props.id} data={this.state.data} origin={this.state.orginData} onAdd={this.onAdd} onDelete={this.onDelete} onSave={this.onSave}></Table>;
+                _content = <Table id={this.props.id} data={this.state.data} origin={this.state.orginData} criteria={this.state.criteria} credit={this.state.credit} onAdd={this.onAdd} onDelete={this.onDelete} onSave={this.onSave}></Table>;
                 break;
             case 3:
                 _content = <Login id={this.props.id} onLogin={this.onLogin}></Login>;

@@ -13,7 +13,8 @@ class Popup extends Component{
             abeek_liberal:false, // 전문교양
             abeek_tech:false, // 공학주제
             abeek_design:false, // 설계
-            data: []
+            data: [],
+            credit: this.props.credit
         }
     }
 
@@ -56,6 +57,7 @@ class Popup extends Component{
     }
 
     render(){
+        console.log(this.props.credit);
         var propsData = this.props.data;
         var data = this.state.data;
         var len = propsData.length;
@@ -248,15 +250,15 @@ class Popup extends Component{
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td style={{borderRight:"1px white solid"}}>0/140</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
+                                            <td>{this.state.credit.required}/{this.props.criteria[4].criteria_credit}</td>
+                                            <td>{this.state.credit.selection}/{this.props.criteria[5].criteria_credit}</td>
+                                            <td>{this.state.credit.liberal}/{this.props.criteria[3].criteria_credit}</td>
+                                            <td>{this.state.credit.general_common}</td>
+                                            <td style={{borderRight:"1px white solid"}}>{this.state.credit.total}/{this.props.criteria[10].criteria_credit}</td>
+                                            <td>{this.state.credit.abeek_bsm}/{this.props.criteria[6].criteria_credit}</td>
+                                            <td>{this.state.credit.abeek_liberal}/{this.props.criteria[7].criteria_credit}</td>
+                                            <td>{this.state.credit.abeek_tech}/{this.props.criteria[9].criteria_credit}</td>
+                                            <td>{this.state.credit.abeek_design}/{this.props.criteria[8].criteria_credit}</td>
                                         </tr>
                                     </tbody>
                                 </table>

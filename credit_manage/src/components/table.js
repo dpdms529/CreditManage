@@ -121,7 +121,7 @@ class Table extends Component{
                         {_button}
                         {this.state.isOpenResult &&
                             <PopupDom>
-                                <Popup id={3} data={data} onClose={this.closeResult}/>
+                                <Popup id={3} data={data} onClose={this.closeResult} criteria={this.props.criteria} credit={this.props.credit}/>
                             </PopupDom>
                         }
                     </div>
