@@ -28,6 +28,14 @@ class Popup extends Component{
 
     }
 
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name] : e.target.value
+        })
+        console.log(e.target.value);
+    }
+
+
     handleSubmit = (e) => {
         e.preventDefault();
         console.log(this.state.content, this.state.year, this.state.division, this.state.abeek_bsm, this.state.abeek_liberal, this.state.abeek_tech, this.state.abeek_design);

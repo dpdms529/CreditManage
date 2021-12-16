@@ -69,9 +69,8 @@ class Content extends Component{
             data : dataList,
             orginData : _data,
             criteria : criteriaList
-        });
+        }, () => { this.onCalc(); });
         console.log(this.state.data[0]);
-        this.onCalc();
         //console.log("criteria:",this.state.criteria[10]);
     }
 
@@ -242,11 +241,12 @@ class Content extends Component{
 
     render(){
 
-        var {criteria} = this.state;
-        if(!criteria){
-            return null;
+        if(this.props.id < 3) {
+            var {criteria} = this.state;
+            if(!criteria){
+                return null;
+            }
         }
-        console.log(criteria[10].criteria_credit);
 
         var _content = null;
         switch(this.props.id){
@@ -272,15 +272,15 @@ class Content extends Component{
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td className="criteria">{this.state.credit.required}/{this.state.criteria[4].criteria_credit}</td>
-                                            <td className="criteria">{this.state.credit.selection}/{this.state.criteria[5].criteria_credit}</td>
+                                            <td className="criteria">{this.state.credit.required}/{this.state.criteria[5].criteria_credit}</td>
+                                            <td className="criteria">{this.state.credit.selection}/{this.state.criteria[6].criteria_credit}</td>
                                             <td className="criteria">{this.state.credit.liberal}/{this.state.criteria[3].criteria_credit}</td>
                                             <td className="criteria">{this.state.credit.general_common}</td>
-                                            <td className="criteria" style={{borderRight:"1px white solid"}}>{this.state.credit.total}/{this.state.criteria[10].criteria_credit}</td>
-                                            <td className="criteria">{this.state.credit.abeek_bsm}/{this.state.criteria[6].criteria_credit}</td>
-                                            <td className="criteria">{this.state.credit.abeek_liberal}/{this.state.criteria[7].criteria_credit}</td>
-                                            <td className="criteria">{this.state.credit.abeek_tech}/{this.state.criteria[9].criteria_credit}</td>
-                                            <td className="criteria">{this.state.credit.abeek_design}/{this.state.criteria[8].criteria_credit}</td>
+                                            <td className="criteria" style={{borderRight:"1px white solid"}}>{this.state.credit.total}/{this.state.criteria[11].criteria_credit}</td>
+                                            <td className="criteria">{this.state.credit.abeek_bsm}/{this.state.criteria[7].criteria_credit}</td>
+                                            <td className="criteria">{this.state.credit.abeek_liberal}/{this.state.criteria[8].criteria_credit}</td>
+                                            <td className="criteria">{this.state.credit.abeek_tech}/{this.state.criteria[10].criteria_credit}</td>
+                                            <td className="criteria">{this.state.credit.abeek_design}/{this.state.criteria[9].criteria_credit}</td>
                                         </tr>
                                     </tbody>
                                 </table>
