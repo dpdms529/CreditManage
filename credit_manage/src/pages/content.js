@@ -19,7 +19,9 @@ class Content extends Component{
                 "selection" : 0,
                 "general_common" : 0,
                 "liberal" : 0,
-                "total" : 0
+                "total" : 0,
+                "GPA": 0.0,
+                "originGPA": 0.0
             }
         }
         if(props.id < 3){
@@ -155,6 +157,7 @@ class Content extends Component{
 
     onCalc = () => {
         var _data = this.state.data;
+        var _origin = this.state.orginData;
         var _credit = {
             "abeek_bsm" : 0,
             "abeek_tech" : 0,
@@ -164,7 +167,9 @@ class Content extends Component{
             "selection" : 0.0,
             "general_common" : 0.0,
             "liberal" : 0.0,
-            "total": 0.0
+            "total": 0.0,
+            "GPA": 0.0,
+            "originGPA": 0.0
         }
 
         for(var i = 0; i<_data.length; i++) {
@@ -230,7 +235,80 @@ class Content extends Component{
                     break;
                 default:
             }
+            switch(_data[i].GP) {
+                case 'A+':
+                    _credit.GPA += 4.5;
+                    break;
+                case 'A':
+                    _credit.GPA += 4.0;
+                    break;
+                case 'B+':
+                    _credit.GPA += 3.5;
+                    break;
+                case 'B':
+                    _credit.GPA += 3.0;
+                    break;
+                case 'C+':
+                    _credit.GPA += 2.5;
+                    break;
+                case 'C':
+                    _credit.GPA += 2.0;
+                    break;
+                case 'D+':
+                    _credit.GPA += 1.5;
+                    break;
+                case 'D':
+                    _credit.GPA += 1.0;
+                    break;
+                case 'P':
+                    _credit.GPA += 4.5;
+                    break;
+                case 'F':
+                    _credit.GPA += 0.0;
+                    break;
+                default:
+                    break;
+            }
         }
+
+        for(var j=0;j<_origin.length;j++) {
+            switch(_origin[j].GP) {
+                case 'A+':
+                    _credit.originGPA += 4.5;
+                    break;
+                case 'A':
+                    _credit.originGPA += 4.0;
+                    break;
+                case 'B+':
+                    _credit.originGPA += 3.5;
+                    break;
+                case 'B':
+                    _credit.originGPA += 3.0;
+                    break;
+                case 'C+':
+                    _credit.originGPA += 2.5;
+                    break;
+                case 'C':
+                    _credit.originGPA += 2.0;
+                    break;
+                case 'D+':
+                    _credit.originGPA += 1.5;
+                    break;
+                case 'D':
+                    _credit.originGPA += 1.0;
+                    break;
+                case 'P':
+                    _credit.originGPA += 4.5;
+                    break;
+                case 'F':
+                    _credit.originGPA += 0.0;
+                    break;
+                default:
+                    break;
+            }
+        }
+        _credit.GPA = _credit.GPA / _data.length;
+        _credit.originGPA = _credit.originGPA / _origin.length;
 
         this.setState({
             credit : _credit

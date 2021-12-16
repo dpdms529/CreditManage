@@ -120,6 +120,11 @@ class Popup extends Component{
                 
             }
         }
+        satisfyList.push(<h3 className="satisfy">예상 총 평점</h3>)
+        satisfyList.push(<div className="satisfy">{this.props.credit.GPA}</div>)
+
+        satisfyList.push(<h3 className="satisfy">현재 총 평점</h3>)
+        satisfyList.push(<div className="satisfy">{this.props.credit.originGPA}</div>)
         return satisfyList;
     }
 
@@ -360,7 +365,7 @@ class Popup extends Component{
                                         {this.isAvailable()}
                                     </tbody>
                                 </table>
-                                <h3 className="satisfy">선후수체계</h3>
+                                <h3 className="satisfy">현재 선후수 만족현황</h3>
                                 {this.isSatisfy()}
                             </form>
                             <button className="popup close" onClick={this.props.onClose}>닫기</button>
