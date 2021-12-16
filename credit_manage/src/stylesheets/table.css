@@ -8,6 +8,10 @@ table{
     width: 100%;
 }
 
+table.tb{
+    min-height: 300px;
+}
+
 tr{
     text-align: center;
     font-size: 20px;

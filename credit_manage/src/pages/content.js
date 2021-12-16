@@ -241,13 +241,13 @@ class Content extends Component{
     }
 
     render(){
-
-        var {criteria} = this.state;
-        if(!criteria){
-            return null;
+        if(this.props.id < 3){
+            var {criteria} = this.state;
+            if(!criteria){
+                return null;
+            }
+            console.log(criteria[10].criteria_credit);
         }
-        console.log(criteria[10].criteria_credit);
-
         var _content = null;
         switch(this.props.id){
             case 1:

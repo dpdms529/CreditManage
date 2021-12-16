@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import axios from "axios";
 import '../stylesheets/table.css';
 import PopupDom from "../pages/popupDom";
 import Popup from '../components/popup';
@@ -13,6 +14,19 @@ class Table extends Component{
             subject: [],
             credit: this.props.credit
         };
+        if(this.props.id === 2){
+            var student_id = new URLSearchParams(window.location.search).get('student_id');
+            axios.post("http://210.117.182.234:8081/~s201912352/satisfy.php",
+            {
+                id:student_id
+            }).then(function(response){
+                console.log(response);
+                var result = response.data.result;
+                console.log("satisfy",result);
+                this.setState({satisfy:result});
+                console.log(this.state.satisfy);
+            }.bind(this));
+        }
     }
 
     openPopup = () => {
@@ -91,7 +105,7 @@ class Table extends Component{
         return(
             <form className="table">
                     <div id="popup"></div>
-                    <table>
+                    <table className="tb">
                         <thead>
                             <tr>
                                 <th>이수구분</th>
@@ -121,7 +135,7 @@ class Table extends Component{
                         {_button}
                         {this.state.isOpenResult &&
                             <PopupDom>
-                                <Popup id={3} data={data} onClose={this.closeResult} criteria={this.props.criteria} credit={this.props.credit}/>
+                                <Popup id={3} data={data} onClose={this.closeResult} criteria={this.props.criteria} credit={this.props.credit} satisfy={this.state.satisfy}/>
                             </PopupDom>
                         }
                     </div>
