@@ -331,7 +331,7 @@ class Popup extends Component{
         }else if(this.props.id === 3){
             _content = <div>
                             <h2 className="title popup">졸업 시뮬레이션 결과</h2>
-                            <form className="popup">
+                            <form className="popup content">
                                 <table>
                                     <thead>
                                         <tr>
