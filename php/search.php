@@ -53,7 +53,7 @@ if(empty($abeek)){
     $abeekStr = "((ca.abeek_cd is not null and ca.abeek_cd regexp '$abeek') or (cb.abeek_cd is not null and cb.abeek_cd regexp '$abeek'))";
 }
 
-$query = "select ca.course_id, ca.title, ca.credit, ca.year, ca.semester, ca.division_cd, ca.division_name, min(ca.abeek_cd) abeek_cd1, min(ca.abeek_name) abeek_name1, min(ca.abeek_credit) abeek_credit1, max(cb.abeek_cd) abeek_cd2, max(cb.abeek_name) abeek_name2, max(cb.abeek_credit) abeek_credit2
+$query = "select ca.course_id, ca.title, ca.credit, ca.year, ca.semester, ca.division_cd, ca.division_name, min(ca.abeek_cd) abeek_cd1, min(ca.abeek_name) abeek_name1, max(ca.abeek_credit) abeek_credit1, max(cb.abeek_cd) abeek_cd2, max(cb.abeek_name) abeek_name2, min(cb.abeek_credit) abeek_credit2
             from 
                 (select c.course_id, c.title, c.credit, c.year, c.semester, c.division_cd, c.division_name, a.abeek_cd, a.abeek_credit, a.abeek_name
                     from 

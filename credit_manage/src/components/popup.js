@@ -7,7 +7,7 @@ class Popup extends Component{
         super(props);
         this.state={
             content:"", // 검색어
-            division:"", //이숙구분
+            division:"", //이수구분
             year:this.props.id===1?"전체":"2021",
             GP:'A+',
             abeek_bsm:false, // BSM
@@ -34,7 +34,6 @@ class Popup extends Component{
         })
         console.log(e.target.value);
     }
-
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -107,6 +106,23 @@ class Popup extends Component{
 
     }
 
+    isSatisfy = () => {
+        var _satisfy = this.props.satisfy;
+        console.log(_satisfy);
+        var satisfyList = []
+        for(var i = 0;i<_satisfy.length;i++){
+            if(_satisfy[i].cnt>0){
+                if(_satisfy[i].satisfy === 'Y'){
+                    satisfyList.push(<div key={i} className="satisfy">{_satisfy[i].ptitle} → {_satisfy[i].title} : <label style={{color:"green"}}>만족</label></div>);
+                }else{
+                    satisfyList.push(<div key={i} className="satisfy">{_satisfy[i].ptitle} → {_satisfy[i].title} : <label style={{color:"red"}}>불만족</label></div>);
+                }
+                
+            }
+        }
+        return satisfyList;
+    }
+
     render(){
         var propsData = this.props.data;
         var data = this.state.data;
@@ -126,6 +142,7 @@ class Popup extends Component{
                         <td>{data[i].credit}</td>
                         <td>
                             <select size="1" onChange={this.handleChange} name="GP">
+                                <option defaultValue={'A+'}>학점 선택</option>
                                 <option>A+</option>
                                 <option>A</option>
                                 <option>B+</option>
@@ -134,6 +151,7 @@ class Popup extends Component{
                                 <option>C</option>
                                 <option>D</option>
                                 <option>D+</option>
+                                <option>P</option>
                                 <option>F</option>
                             </select>
                         </td>
@@ -158,6 +176,7 @@ class Popup extends Component{
                         <td>{data[i].credit}</td>
                         <td>
                             <select size="1" onChange={this.handleChange} name="GP">
+                                <option defaultValue={'A+'}>학점 선택</option>
                                 <option>A+</option>
                                 <option>A</option>
                                 <option>B+</option>
@@ -166,6 +185,7 @@ class Popup extends Component{
                                 <option>C</option>
                                 <option>D</option>
                                 <option>D+</option>
+                                <option>P</option>
                                 <option>F</option>
                             </select>
                         </td>
@@ -340,6 +360,8 @@ class Popup extends Component{
                                         {this.isAvailable()}
                                     </tbody>
                                 </table>
+                                <h3 className="satisfy">선후수체계</h3>
+                                {this.isSatisfy()}
                             </form>
                             <button className="popup close" onClick={this.props.onClose}>닫기</button>
                         </div>

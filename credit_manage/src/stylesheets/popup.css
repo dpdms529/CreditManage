@@ -53,3 +53,12 @@ td {
 th.result{
     width: 10%;
 }
+
+h3.satisfy{
+    margin:10px;
+}
+
+div.satisfy{
+    font-size: large;
+    margin:10px;
+}
